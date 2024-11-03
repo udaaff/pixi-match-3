@@ -1,6 +1,6 @@
 import '@pixi/spine-pixi';
 
-import { Application } from 'pixi.js';
+import { Application, Ticker } from 'pixi.js';
 import { initAssets } from './utils/assets';
 import { navigation } from './utils/navigation';
 // import { GameScreen } from './screens/GameScreen';
@@ -10,9 +10,17 @@ import { LoadScreen } from './screens/LoadScreen';
 // import { TiledBackground } from './ui/TiledBackground';
 // import { getUrlParam } from './utils/getUrlParams';
 import { sound } from '@pixi/sound';
+import { Wait } from './process/Wait';
+import { logProcessInfo } from './process/Process';
+import { SerialProcess } from './process/SerialProcess';
+import { ParallelProcess } from './process/ParallelProcess';
+import { addProcess } from './process/ProcessRunner';
 
 // The PixiJS app Application instance, shared across the project
 export const app = new Application();
+
+export const gameTicker = new Ticker();
+gameTicker.autoStart = true;
 
 // Set up a resize function for the app
 function resize() {
@@ -72,22 +80,26 @@ async function init() {
     // Setup assets bundles (see assets.ts) and start up loading everything in background
     await initAssets();
 
-    // Add a persisting background shared by all screens
-    // navigation.setBackground(TiledBackground);
-
+    // new SerialProcess([
+    //     new Wait(2000),
+    //     new Wait(1000),
+    //     new Wait(3000),
+    //     new ParallelProcess([
+    //         new Wait(5000),
+    //         new Wait(10000)
+    //     ])
+    // ], 1000).start();
+    addProcess(new Wait(2000), "test", true);
+    addProcess(new Wait(2000), "test", true);
+    addProcess(new Wait(2000), "test", false);
+    addProcess(new Wait(2000), "test", false);
+    // new Wait(15000).start();
+    // new Wait(115000).start();
+    // new Wait(125000).start();
+    logProcessInfo();
     // // Show initial loading screen
     await navigation.showScreen(LoadScreen);
 
-    // // Go to one of the screens if a shortcut is present in url params, otherwise go to home screen
-    // if (getUrlParam('game') !== null) {
-    //     await navigation.showScreen(GameScreen);
-    // } else if (getUrlParam('load') !== null) {
-    //     await navigation.showScreen(LoadScreen);
-    // } else if (getUrlParam('result') !== null) {
-    //     await navigation.showScreen(ResultScreen);
-    // } else {
-    //     await navigation.showScreen(HomeScreen);
-    // }
 }
 
 // Init everything
