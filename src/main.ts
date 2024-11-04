@@ -16,6 +16,9 @@ import { SerialProcess } from './process/SerialProcess';
 import { ParallelProcess } from './process/ParallelProcess';
 import { addProcess } from './process/ProcessRunner';
 import { getObject, tracePools } from './pool/pool';
+import { EntityID } from './model/EntityID';
+import { LevelData } from './model/LevelData';
+import { getLevelData, setRawLevelsData } from './model/levels';
 
 // The PixiJS app Application instance, shared across the project
 export const app = new Application();
@@ -106,6 +109,9 @@ async function init() {
 
     const levels = Assets.get("levels.json");
     console.log(levels)
+
+    setRawLevelsData(levels);
+    console.log(getLevelData(0));
 }
 
 // Init everything
