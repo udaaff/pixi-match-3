@@ -1,6 +1,6 @@
 import '@pixi/spine-pixi';
 
-import { Application, Ticker } from 'pixi.js';
+import { Application, Assets, Sprite, Ticker } from 'pixi.js';
 import { initAssets } from './utils/assets';
 import { navigation } from './utils/navigation';
 // import { GameScreen } from './screens/GameScreen';
@@ -15,6 +15,7 @@ import { logProcessInfo } from './process/Process';
 import { SerialProcess } from './process/SerialProcess';
 import { ParallelProcess } from './process/ParallelProcess';
 import { addProcess } from './process/ProcessRunner';
+import { getObject, tracePools } from './pool/pool';
 
 // The PixiJS app Application instance, shared across the project
 export const app = new Application();
@@ -100,6 +101,11 @@ async function init() {
     // // Show initial loading screen
     await navigation.showScreen(LoadScreen);
 
+    const s = getObject(Sprite)
+    tracePools();
+
+    const levels = Assets.get("levels.json");
+    console.log(levels)
 }
 
 // Init everything
