@@ -4,11 +4,16 @@ const minWidth = 428;
 const minHeight = 925;
 
 /** Object to store all configuration values for the out of gameplay design logic. */
-export const designConfig = {
+export const cfg = {
     content: {
         width: minWidth,
         height: minHeight,
     },
     /** Tile scale for the background elements found in each screen. */
     backgroundTileScale: 2,
+
+    appWidth: 760,
+    appHeight: 650,
+
+
 };

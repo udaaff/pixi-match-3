@@ -1,7 +1,7 @@
 import gsap from 'gsap';
 import { Container, Sprite, Texture, Ticker, TilingSprite } from 'pixi.js';
 
-import { designConfig } from '../game/designConfig';
+import { cfg } from '../game/cfg';
 import { PixiLogo } from '../ui/PixiLogo';
 // import { i18n } from '../utils/i18n';
 
@@ -28,8 +28,8 @@ export class LoadScreen extends Container {
             width: 64,
             height: 64,
             tileScale: {
-                x: designConfig.backgroundTileScale,
-                y: designConfig.backgroundTileScale,
+                x: cfg.backgroundTileScale,
+                y: cfg.backgroundTileScale,
             },
         });
         this.addChild(this._background);

@@ -1,6 +1,8 @@
 import { removeElementAt } from "../utils/arrayUtils";
 import { Process } from "./Process";
 
+type LaneID = "game";
+
 class Lane {
     public blockingProcesses: Process[] = [];
     public nonblockingProcesses: Map<Process, Process[]> = new Map();
@@ -27,7 +29,7 @@ class Lane {
 const laneIdToLane: Map<string, Lane> = new Map();
 const processToLane: Map<Process, Lane> = new Map();
 
-export function addProcess(process: Process, laneID: string, isBlocking = true): void {
+export function addProcess(process: Process, laneID: LaneID, isBlocking = true): void {
     if (processToLane.has(process))
         return;
 
@@ -64,7 +66,7 @@ export function addProcess(process: Process, laneID: string, isBlocking = true):
     process.start();
 }
 
-export function interrupt(laneId: string): void {
+export function interrupt(laneId: LaneID): void {
     const lane = laneIdToLane.get(laneId);
     if (!lane)
         return;

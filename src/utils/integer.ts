@@ -4,7 +4,7 @@ export class SafeInt {
     private _value: int;
     private readonly _key: int = Math.round(1e8 * Math.random());
 
-    constructor(value: int) {
+    constructor(value: int = 0) {
         this._value = value;
     }
 

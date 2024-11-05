@@ -14,7 +14,7 @@ import { Wait } from './process/Wait';
 import { logProcessInfo } from './process/Process';
 import { SerialProcess } from './process/SerialProcess';
 import { ParallelProcess } from './process/ParallelProcess';
-import { addProcess } from './process/ProcessRunner';
+import { addProcess } from './process/processRunner';
 import { getObject, tracePools } from './pool/pool';
 import { EntityID } from './model/EntityID';
 import { LevelData } from './model/LevelData';
@@ -93,10 +93,10 @@ async function init() {
     //         new Wait(10000)
     //     ])
     // ], 1000).start();
-    addProcess(new Wait(2000), "test", true);
-    addProcess(new Wait(2000), "test", true);
-    addProcess(new Wait(2000), "test", false);
-    addProcess(new Wait(2000), "test", false);
+    addProcess(new Wait(2000), "game", true);
+    addProcess(new Wait(2000), "game", true);
+    addProcess(new Wait(2000), "game", false);
+    addProcess(new Wait(2000), "game", false);
     // new Wait(15000).start();
     // new Wait(115000).start();
     // new Wait(125000).start();
