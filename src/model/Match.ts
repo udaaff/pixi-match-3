@@ -21,6 +21,4 @@ export class Match {
     public getNotBlockedMatchables(): BoardObject[] {
         return this.gems.filter(gem => !gem.isBlocked);
     }
-
-
 }

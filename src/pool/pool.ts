@@ -1,3 +1,8 @@
+export interface PoolClient {
+    onGetFromPool(): void;
+    onDisposeToPool(): void;
+}
+
 class Pool<T = new () => any> {
     private readonly pool: T[] = [];
     private readonly objectsMap: Map<T, boolean> = new Map();
@@ -59,7 +64,9 @@ export function getObject<T>(type: new () => T): T {
         pools.set(type, pool);
     }
 
-    return pool.getObject();
+    const obj = pool.getObject();
+    (obj as PoolClient)?.onGetFromPool();
+    return obj;
 }
 
 /**
@@ -73,7 +80,10 @@ export function disposeObject<T>(object: T): void {
     const type = object.constructor as new () => T;
     const pool = pools.get(type);
 
-    if (!pool) throw new Error(`Pool for ${type.name} is not registered`);
+    if (!pool)
+        throw new Error(`Pool for ${type.name} is not registered`);
+
+    (object as unknown as PoolClient)?.onDisposeToPool();
     pool.disposeObject(object);
 }
 

@@ -15,5 +15,7 @@ export const cfg = {
     appWidth: 760,
     appHeight: 650,
 
-
+    // num cells
+    viewportHLength: 8,
+    viewportVLength: 8,
 };

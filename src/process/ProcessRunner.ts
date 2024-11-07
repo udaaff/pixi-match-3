@@ -1,4 +1,4 @@
-import { removeElementAt } from "../utils/arrayUtils";
+import { removeElementOnce } from "../utils/arrayUtils";
 import { Process } from "./Process";
 
 type LaneID = "game";
@@ -106,6 +106,6 @@ function onNonblockingProcessComplete(process: Process): void {
     if (!lane)
         return;
 
-    removeElementAt(lane.currentNonblockingProcess, process);
+    removeElementOnce(lane.currentNonblockingProcess, process);
     processToLane.delete(process);
 }

@@ -1,4 +1,5 @@
 export type int = number;
+export type uint = number;
 
 export class SafeInt {
     private _value: int;
