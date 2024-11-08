@@ -1,7 +1,7 @@
 import '@pixi/spine-pixi';
 
 import { Application, Assets, Sprite, Ticker } from 'pixi.js';
-import { initAssets } from './utils/assets';
+import { initAssets, loadBundles } from './utils/assets';
 import { navigation } from './utils/navigation';
 // import { GameScreen } from './screens/GameScreen';
 // import { HomeScreen } from './screens/HomeScreen';
@@ -10,15 +10,11 @@ import { LoadScreen } from './screens/LoadScreen';
 // import { TiledBackground } from './ui/TiledBackground';
 // import { getUrlParam } from './utils/getUrlParams';
 import { sound } from '@pixi/sound';
-import { Wait } from './process/Wait';
 import { logProcessInfo } from './process/Process';
-import { SerialProcess } from './process/SerialProcess';
-import { ParallelProcess } from './process/ParallelProcess';
 import { addProcess } from './process/processRunner';
 import { getObject, tracePools } from './pool/pool';
-import { EntityID } from './model/EntityID';
-import { LevelData } from './model/LevelData';
 import { getLevelData, setRawLevelsData } from './model/levels';
+import { GameplayProcess } from './process/GameplayProcess';
 
 // The PixiJS app Application instance, shared across the project
 export const app = new Application();
@@ -83,6 +79,8 @@ async function init() {
 
     // Setup assets bundles (see assets.ts) and start up loading everything in background
     await initAssets();
+    await loadBundles("board-objects");
+
 
     // new SerialProcess([
     //     new Wait(2000),
@@ -93,10 +91,10 @@ async function init() {
     //         new Wait(10000)
     //     ])
     // ], 1000).start();
-    addProcess(new Wait(2000), "game", true);
-    addProcess(new Wait(2000), "game", true);
-    addProcess(new Wait(2000), "game", false);
-    addProcess(new Wait(2000), "game", false);
+    // addProcess(new Wait(2000), "app", true);
+    // addProcess(new Wait(2000), "game", true);
+    // addProcess(new Wait(2000), "game", false);
+    // addProcess(new Wait(2000), "game", false);
     // new Wait(15000).start();
     // new Wait(115000).start();
     // new Wait(125000).start();
@@ -112,6 +110,7 @@ async function init() {
 
     setRawLevelsData(levels);
     console.log(getLevelData(0));
+    addProcess(new GameplayProcess(0), 'app');
 }
 
 // Init everything

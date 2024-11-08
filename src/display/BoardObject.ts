@@ -3,6 +3,7 @@ import { BoardCoordinates } from "../model/BoardCoordinates";
 import { PoolClient } from "../pool/pool";
 import { int } from "../utils/integer";
 import { Eye } from "./Eye";
+import { EntityID } from "../model/EntityID";
 
 export interface Moveable extends BoardObject {
     addImpuls(): void;
@@ -49,7 +50,7 @@ export abstract class BoardObject extends Container implements PoolClient {
     public isBlocked = false;
     public coordinates: BoardCoordinates | null = null;
 
-    constructor(params: BoardObjectParams) {
+    constructor(params?: BoardObjectParams) {
         super();
         this._isMoveable = params?.isMoveable ?? false;
         this._isMatchable = params?.isMatchable ?? false;
@@ -59,7 +60,7 @@ export abstract class BoardObject extends Container implements PoolClient {
         this.isLock = params?.isLock ?? false;
         this.isKey = params?.isKey ?? false;
         this.isAffectable = params?.isAffectable ?? false;
-        this.entityID = params.entityID;
+        this.entityID = params?.entityID ?? EntityID.ENTITY_NONE;
     }
 
     public isMatchableType(): this is Matchable {

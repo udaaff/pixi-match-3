@@ -18,4 +18,7 @@ export const cfg = {
     // num cells
     viewportHLength: 8,
     viewportVLength: 8,
+
+    boardCellWidth: 68,
+    boardCellHeight: 68,
 };

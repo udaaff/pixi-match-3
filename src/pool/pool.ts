@@ -65,7 +65,9 @@ export function getObject<T>(type: new () => T): T {
     }
 
     const obj = pool.getObject();
-    (obj as PoolClient)?.onGetFromPool();
+    if (typeof (obj as PoolClient).onGetFromPool === 'function') {
+        (obj as PoolClient).onGetFromPool();
+    }
     return obj;
 }
 
@@ -83,7 +85,9 @@ export function disposeObject<T>(object: T): void {
     if (!pool)
         throw new Error(`Pool for ${type.name} is not registered`);
 
-    (object as unknown as PoolClient)?.onDisposeToPool();
+    if (typeof (object as unknown as PoolClient).onGetFromPool === 'function')
+        (object as unknown as PoolClient).onGetFromPool();
+
     pool.disposeObject(object);
 }
 

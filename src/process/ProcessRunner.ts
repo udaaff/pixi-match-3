@@ -1,7 +1,7 @@
 import { removeElementOnce } from "../utils/arrayUtils";
 import { Process } from "./Process";
 
-type LaneID = "game";
+type LaneID = "app" | "gameplay";
 
 class Lane {
     public blockingProcesses: Process[] = [];
