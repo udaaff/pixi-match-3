@@ -2,7 +2,6 @@ import { Container } from "pixi.js";
 import { BoardCoordinates } from "../model/BoardCoordinates";
 import { PoolClient } from "../pool/pool";
 import { int } from "../utils/integer";
-import { Match } from "../model/Match";
 import { Eye } from "./Eye";
 
 export interface Moveable extends BoardObject {
