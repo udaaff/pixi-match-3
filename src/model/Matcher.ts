@@ -18,4 +18,8 @@ export class Matcher {
     public hasMatch(): boolean {
         return false;
     }
+
+    public hasMove(): boolean {
+        return false;
+    }
 }
