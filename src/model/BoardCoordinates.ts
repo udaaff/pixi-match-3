@@ -2,8 +2,8 @@ import { int } from "../utils/integer";
 
 export class BoardCoordinates {
     constructor(
-        public readonly row: int,
-        public readonly column: int
+        public row: int,
+        public column: int
     ) {}
 
     public alignedWith(coordinates: BoardCoordinates): boolean {
