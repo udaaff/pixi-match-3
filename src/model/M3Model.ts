@@ -1,4 +1,4 @@
-import { BoardObject, Matchable } from "../display/BoardObject";
+import { BoardObject } from "../display/BoardObject";
 import { Bomb } from "../display/Bomb";
 import { ColorBomb } from "../display/ColorBomb";
 import { Target } from "../display/Target";
