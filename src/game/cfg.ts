@@ -21,4 +21,6 @@ export const cfg = {
 
     boardCellWidth: 68,
     boardCellHeight: 68,
+
+    maxShuffleAttemps: 1000,
 };

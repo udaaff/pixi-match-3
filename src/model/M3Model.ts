@@ -68,9 +68,9 @@ export class M3Model {
         this._locks = new Array(this.boardVLength).fill([]);
         this._bgItems = new Array(this.boardVLength).fill([]);
         this._crystals = new Array(this.boardVLength).fill([]);
-        this.setSpawners(gameSession.levelData.spawners);
-        this.setSpawnData(gameSession.levelData.spawns);
-        this.setWayPoints(gameSession.levelData.wayPoints);
+        // this.setSpawners(gameSession.levelData.spawners);
+        // this.setSpawnData(gameSession.levelData.spawns);
+        // this.setWayPoints(gameSession.levelData.wayPoints);
     }
 
     public registerTarget(target: Target): void {

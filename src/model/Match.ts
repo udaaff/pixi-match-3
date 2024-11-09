@@ -11,12 +11,10 @@ export class Match {
     public static MATCH_CROSS = "matchCross";
     public static MATCH_COLOR = "matchColor";
 
-    constructor(
-        public trigger: BoardObject,
-        public gems: BoardObject[],
-        public type: string,
-        public direction = 0
-    ) {}
+    public trigger: BoardObject | undefined;
+    public gems!: BoardObject[];
+    public combinationType = Match.MATCH_3;
+    public direction = 0
 
     public getNotBlockedMatchables(): BoardObject[] {
         return this.gems.filter(gem => !gem.isBlocked);

@@ -33,6 +33,7 @@ export interface BoardObjectParams {
     isFrozen?: boolean;
     isLock?: boolean;
     isKey?: boolean;
+    isSoil?: boolean;
     hasEye?: boolean;
     entityID: int;
 }
@@ -47,6 +48,7 @@ export abstract class BoardObject extends Container implements PoolClient {
     public readonly entityID: int;
     public readonly isKey: boolean;
     public readonly isAffectable: boolean;
+    public readonly isSoil: boolean;
 
     public isBlocked = false;
     public coordinates: BoardCoordinates | null = null;
@@ -60,6 +62,7 @@ export abstract class BoardObject extends Container implements PoolClient {
         this.isFrozen = params?.isFrozen ?? false;
         this.isLock = params?.isLock ?? false;
         this.isKey = params?.isKey ?? false;
+        this.isSoil = params?.isSoil ?? false;
         this.isAffectable = params?.isAffectable ?? false;
         this.entityID = params?.entityID ?? EntityID.ENTITY_NONE;
     }
