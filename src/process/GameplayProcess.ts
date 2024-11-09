@@ -5,23 +5,32 @@ import { GameSessionData } from "../model/GameSessionData";
 import { getLevelData } from "../model/levels";
 import { M3Model } from "../model/M3Model";
 import { int } from "../utils/integer";
+import { Context } from "./Context";
+import { CreateRocks } from "./CreateRocks";
 import { CreateTiles } from "./CreateTiles";
-import { GameProcess } from "./GameProcess";
 import { Process } from "./Process";
 import { addProcess } from "./processRunner";
 
 export class GameplayProcess extends Process {
+    private static _ctx: Context;
+    private _model!: M3Model;
+    private _view!: Board;
+
     constructor(private readonly _levelID: int) {
         super();
     }
 
+    public static get ctx(): Context { return this._ctx }
+
     protected override onStart(): void {
-        // retrieving info from server
         setSelectedLevel(getLevelData(this._levelID));
         setGameSession(new GameSessionData(getSelectedLevel()));
-        const model = new M3Model(getGameSession());
-        const view = new Board();
-        app.stage.addChild(view);
-        addProcess(new CreateTiles(view, model), "gameplay");
+
+        this._model = new M3Model(getGameSession());
+        this._view = new Board();
+        app.stage.addChild(this._view);
+        GameplayProcess._ctx = new Context(this._model, this._view);
+        addProcess(new CreateTiles(), "gameplay");
+        addProcess(new CreateRocks(), "gameplay");
     }
 }

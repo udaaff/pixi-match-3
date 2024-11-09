@@ -8,6 +8,7 @@ import { int, uint } from "../utils/integer";
 import { getRandom } from "../utils/random";
 import { BoardCoordinates } from "./BoardCoordinates";
 import { GameSessionData } from "./GameSessionData";
+import { LevelData } from "./LevelData";
 import { Match } from "./Match";
 import { ColorType, getMatchTypeByEntityID } from "./matchColor";
 import { Matcher } from "./Matcher";
@@ -31,6 +32,7 @@ export class M3Model {
     public readonly boardHLength: int;
     public readonly viewport: Viewport = new Viewport(cfg.viewportVLength, cfg.viewportHLength);
     public readonly spawnableMatchTypes: int[] = [];
+    public readonly levelData: LevelData;
     private readonly _registeredSpawners: BoardCoordinates[][];
     private readonly _entrances: BoardCoordinates[][];
     private readonly _exits: BoardCoordinates[][];
@@ -51,6 +53,7 @@ export class M3Model {
     private _targets = new Map<int, Target>();
 
     constructor(gameSession: GameSessionData) {
+        this.levelData = gameSession.levelData;
         this.matcher = new Matcher(this);
         this.boardHLength = gameSession.levelData.boardHLength;
         this.boardVLength = gameSession.levelData.boardVLength;

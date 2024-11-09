@@ -1,6 +1,7 @@
 import { Signal } from "typed-signals";
-import { LevelData } from "./LevelData";
+
 import { GameSessionData } from "./GameSessionData";
+import { LevelData } from "./LevelData";
 
 let selectedLevel: LevelData;
 export const onLevelSelected = new Signal<() => void>();

@@ -1,4 +1,5 @@
 import { Signal } from "typed-signals";
+
 import { int, SafeInt } from "../utils/integer";
 
 export class TargetData {

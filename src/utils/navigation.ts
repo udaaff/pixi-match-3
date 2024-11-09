@@ -1,6 +1,7 @@
 import { Container, Ticker } from 'pixi.js';
-import { areBundlesLoaded, loadBundles } from './assets';
+
 import { app } from '../main';
+import { areBundlesLoaded, loadBundles } from './assets';
 import { pool } from './pool';
 
 /** Interface for app screens */

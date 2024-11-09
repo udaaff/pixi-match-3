@@ -1,24 +1,14 @@
-import { Board } from "../display/Board";
 import { Tile } from "../display/Tile";
 import { cfg } from "../game/cfg";
-import { getGameSession } from "../model/app";
-import { M3Model } from "../model/M3Model";
 import { getObject } from "../pool/pool";
-import { Process } from "./Process";
+import { GameplayInternal } from "./GameplayInternal";
 
-export class CreateTiles extends Process {
-    constructor(
-        private readonly view: Board,
-        private readonly model: M3Model
-    ) {
-        super();
-    }
+export class CreateTiles extends GameplayInternal {
 
     protected override onStart(): void {
-        const board = getGameSession().levelData.board;
-        const iLength = this.model.boardVLength;
-        const jLength = this.model.boardHLength;
-
+        const board = this.ctx.model.levelData.board;
+        const iLength = this.ctx.model.boardVLength;
+        const jLength = this.ctx.model.boardHLength;
         for (let i = 0; i < iLength; i++) {
             for (let j = 0; j < jLength; j++) {
                 const tileData = board[i][j];
@@ -28,8 +18,8 @@ export class CreateTiles extends Process {
                 const tile = getObject(Tile);
                 tile.x = cfg.boardCellWidth * j;
                 tile.y = cfg.boardCellHeight * i;
-                this.model.registerTileAt(tile, i, j);
-                this.view.tilesContainer.addChild(tile);
+                this.ctx.model.registerTileAt(tile, i, j);
+                this.ctx.view.tilesContainer.addChild(tile);
             }
         }
 

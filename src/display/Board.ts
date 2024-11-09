@@ -13,9 +13,11 @@ import { Container } from "pixi.js";
  */
 export class Board extends Container {
     public readonly tilesContainer = new Container();
+    public readonly rockTilesContainer = new Container();
 
     constructor() {
         super();
         this.addChild(this.tilesContainer);
+        this.addChild(this.rockTilesContainer);
     }
 }

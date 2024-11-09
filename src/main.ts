@@ -1,20 +1,21 @@
 import '@pixi/spine-pixi';
 
-import { Application, Assets, Sprite, Ticker } from 'pixi.js';
-import { initAssets, loadBundles } from './utils/assets';
-import { navigation } from './utils/navigation';
-// import { GameScreen } from './screens/GameScreen';
-// import { HomeScreen } from './screens/HomeScreen';
-import { LoadScreen } from './screens/LoadScreen';
 // import { ResultScreen } from './screens/ResultScreen';
 // import { TiledBackground } from './ui/TiledBackground';
 // import { getUrlParam } from './utils/getUrlParams';
 import { sound } from '@pixi/sound';
+import { Application, Assets, Sprite, Ticker } from 'pixi.js';
+
+import { getLevelData, setRawLevelsData } from './model/levels';
+import { getObject, tracePools } from './pool/pool';
+import { GameplayProcess } from './process/GameplayProcess';
 import { logProcessInfo } from './process/Process';
 import { addProcess } from './process/processRunner';
-import { getObject, tracePools } from './pool/pool';
-import { getLevelData, setRawLevelsData } from './model/levels';
-import { GameplayProcess } from './process/GameplayProcess';
+// import { GameScreen } from './screens/GameScreen';
+// import { HomeScreen } from './screens/HomeScreen';
+import { LoadScreen } from './screens/LoadScreen';
+import { initAssets, loadBundles } from './utils/assets';
+import { navigation } from './utils/navigation';
 
 // The PixiJS app Application instance, shared across the project
 export const app = new Application();

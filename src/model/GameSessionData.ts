@@ -1,8 +1,9 @@
 import { Signal } from "typed-signals";
+
 import { int, SafeInt } from "../utils/integer";
 import { LevelData } from "./LevelData";
-import { TargetData } from "./TargetData";
 import { getScoreByMatchType, SCORE_TARGET } from "./score";
+import { TargetData } from "./TargetData";
 
 export class GameSessionData {
     private _numMoves = new SafeInt();

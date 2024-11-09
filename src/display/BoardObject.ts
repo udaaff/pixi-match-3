@@ -1,9 +1,10 @@
 import { Container } from "pixi.js";
+
 import { BoardCoordinates } from "../model/BoardCoordinates";
+import { EntityID } from "../model/EntityID";
 import { PoolClient } from "../pool/pool";
 import { int } from "../utils/integer";
 import { Eye } from "./Eye";
-import { EntityID } from "../model/EntityID";
 
 export interface Moveable extends BoardObject {
     addImpuls(): void;

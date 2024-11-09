@@ -1,6 +1,7 @@
 import { Ticker } from "pixi.js";
-import { gameTicker } from "../main";
 import { Signal } from "typed-signals";
+
+import { gameTicker } from "../main";
 
 const debug = true;
 const _d: {[key: string]: number} = {};
