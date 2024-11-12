@@ -43,6 +43,7 @@ export abstract class BoardObject extends Container implements PoolClient {
     private readonly _isMatchable: boolean;
     private readonly _isSleepable: boolean;
     private readonly _hasEye: boolean;
+    protected _numLives: int = 1;
     public readonly isFrozen: boolean;
     public readonly isLock: boolean;
     public readonly entityID: int;
@@ -83,6 +84,9 @@ export abstract class BoardObject extends Container implements PoolClient {
         return this._hasEye;
     }
 
-    public onGetFromPool(): void {}
-    public onDisposeToPool(): void {}
+    public onGetFromPool(): void { }
+    public onDisposeToPool(): void { }
+
+    public get numLives(): int { return this._numLives; }
+    public set numLives(value: int) { }
 }

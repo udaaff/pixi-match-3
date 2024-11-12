@@ -3,7 +3,14 @@ export interface PoolClient {
     onDisposeToPool(): void;
 }
 
-class Pool<T = new () => any> {
+export interface IPool<T> {
+    // get creator(): void;
+    getObject(...args: any[]): T;
+    disposeObject(object: T, ...args: any[]): void;
+    toString(): string;
+}
+
+class Pool<T = new () => any> implements IPool<T>{
     private readonly pool: T[] = [];
     private readonly objectsMap: Map<T, boolean> = new Map();
     private outOfPoolCount: number = 0;
@@ -51,20 +58,23 @@ class Pool<T = new () => any> {
     }
 }
 
-const pools: Map<new () => any, Pool<any>> = new Map();
+const pools: Map<new () => any, IPool<any>> = new Map();
 
+export function registerPool<T>(pool: IPool<T>, type: new (...args: any[]) => any): void {
+    pools.set(type, pool);
+}
 /**
  * Retrieves an object from the pool, creating a new pool if needed.
  * @param type The class type of the object.
  */
-export function getObject<T>(type: new () => T): T {
+export function getObject<T>(type: new () => T, ...args: any[]): T {
     let pool = pools.get(type);
     if (!pool) {
         pool = new Pool(type);
         pools.set(type, pool);
     }
 
-    const obj = pool.getObject();
+    const obj = pool.getObject(...args) as T;
     if (typeof (obj as PoolClient).onGetFromPool === 'function') {
         (obj as PoolClient).onGetFromPool();
     }
@@ -75,7 +85,7 @@ export function getObject<T>(type: new () => T): T {
  * Disposes an object back to its pool.
  * @param object The object to dispose.
  */
-export function disposeObject<T>(object: T): void {
+export function disposeObject<T>(object: T, ...args: any[]): void {
     if (object === null || typeof object !== 'object')
         return;
 
@@ -88,7 +98,7 @@ export function disposeObject<T>(object: T): void {
     if (typeof (object as unknown as PoolClient).onGetFromPool === 'function')
         (object as unknown as PoolClient).onGetFromPool();
 
-    pool.disposeObject(object);
+    pool.disposeObject(object, ...args);
 }
 
 /**

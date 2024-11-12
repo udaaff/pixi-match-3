@@ -64,6 +64,6 @@ gemIdToCrossBombId.set(EntityID.GEM_PURPLE, EntityID.BOMB_CROSS_PURPLE);
 gemIdToCrossBombId.set(EntityID.GEM_RED, EntityID.BOMB_CROSS_RED);
 gemIdToCrossBombId.set(EntityID.GEM_YELLOW, EntityID.BOMB_CROSS_YELLOW);
 
-export function getTypeByID(entityID: int): int {
+export function getBombTypeByEntityID(entityID: int): int {
     return idToTypeMap.get(entityID) ?? EntityID.ENTITY_NONE;
 }

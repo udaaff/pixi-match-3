@@ -16,7 +16,6 @@ export class TileData {
     private _lock = EntityID.ENTITY_NONE;
     private _block = EntityID.ENTITY_NONE;
     private _bomb = EntityID.ENTITY_NONE;
-    // private _boss = EntityID.ENTITY_NONE;
     private _crystal = EntityID.ENTITY_NONE;
 
     constructor(
@@ -39,8 +38,6 @@ export class TileData {
                 this._bgItem = entityID;
             else if (entityType == EntityType.GEM)
                 this._gem = entityID;
-            // else if (entityType == EntityType.BOSS)
-            //     this._boss = entityID;
             else if (entityType == EntityType.CRYSTAL)
                 this._crystal = entityID;
             else if (entityType == EntityType.MARKER_WAY_POINT)
