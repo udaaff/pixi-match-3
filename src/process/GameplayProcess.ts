@@ -8,6 +8,7 @@ import { int } from "../utils/integer";
 import { Context } from "./Context";
 import { CreateRocks } from "./CreateRocks";
 import { CreateTiles } from "./CreateTiles";
+import { InitializeBoard } from "./InitializeBoard";
 import { Process } from "./Process";
 import { addProcess } from "./processRunner";
 
@@ -32,5 +33,6 @@ export class GameplayProcess extends Process {
         GameplayProcess._ctx = new Context(this._model, this._view);
         addProcess(new CreateTiles(), "gameplay");
         addProcess(new CreateRocks(), "gameplay");
+        addProcess(new InitializeBoard(), "gameplay");
     }
 }

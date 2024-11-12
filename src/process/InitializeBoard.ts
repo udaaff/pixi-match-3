@@ -1,14 +1,9 @@
 import { centerObjectAt } from "../display/Board";
 import { BoardObject } from "../display/BoardObject";
 import { Sand } from "../display/Sand";
-import { cfg } from "../game/cfg";
 import { BoardCoordinates } from "../model/BoardCoordinates";
-import { BombType, getBombTypeByEntityID } from "../model/BombType";
 import { EntityID } from "../model/EntityID";
-import { Viewport } from "../model/Viewport";
 import { getObject } from "../pool/pool";
-import { shuffle } from "../utils/arrayUtils";
-import { int } from "../utils/integer";
 import { GameplayInternal } from "./GameplayInternal";
 
 export class InitializeBoard extends GameplayInternal {
@@ -40,8 +35,7 @@ export class InitializeBoard extends GameplayInternal {
                 }
 
                 if (tileData.bgItem !== EntityID.ENTITY_NONE) {
-                    let sand: Sand = M3Pool.getSand(tileData.bgItem);
-                    const sand = getObject(Sand)
+                    const sand = getObject(Sand, tileData.bgItem);
                     this.ctx.model.registerBGItemAt(sand, i, j);
                     centerObjectAt(sand, i, j);
                     this.ctx.view.bgItemsContainer.addChild(sand);

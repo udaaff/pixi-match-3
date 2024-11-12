@@ -88,5 +88,5 @@ export abstract class BoardObject extends Container implements PoolClient {
     public onDisposeToPool(): void { }
 
     public get numLives(): int { return this._numLives; }
-    public set numLives(value: int) { }
+    public set numLives(_value: int) { }
 }

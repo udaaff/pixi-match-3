@@ -29,5 +29,6 @@ export class CreateRocks extends GameplayInternal {
         }
 
         // todo: add RockBorderGroup
+        this.complete();
     }
 }

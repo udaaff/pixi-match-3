@@ -67,7 +67,7 @@ export function registerPool<T>(pool: IPool<T>, type: new (...args: any[]) => an
  * Retrieves an object from the pool, creating a new pool if needed.
  * @param type The class type of the object.
  */
-export function getObject<T>(type: new () => T, ...args: any[]): T {
+export function getObject<T>(type: new (...args: any[]) => T, ...args: any[]): T {
     let pool = pools.get(type);
     if (!pool) {
         pool = new Pool(type);

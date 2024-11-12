@@ -16,6 +16,7 @@ import { addProcess } from './process/processRunner';
 import { LoadScreen } from './screens/LoadScreen';
 import { initAssets, loadBundles } from './utils/assets';
 import { navigation } from './utils/navigation';
+import { registerPools } from './pool/poolUtil';
 
 // The PixiJS app Application instance, shared across the project
 export const app = new Application();
@@ -103,7 +104,8 @@ async function init() {
     // // Show initial loading screen
     await navigation.showScreen(LoadScreen);
 
-    const s = getObject(Sprite)
+    registerPools();
+    // const s = getObject(Sprite)
     tracePools();
 
     const levels = Assets.get("levels.json");

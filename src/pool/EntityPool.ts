@@ -1,3 +1,4 @@
+import { Sprite } from "pixi.js";
 import { int } from "../utils/integer";
 import { IPool } from "./pool";
 
@@ -16,6 +17,12 @@ export class Creator<T> {
 
     public get objectClass(): Constructor<T> {
         return this.cls;
+    }
+}
+
+export class SpriteCreator extends Creator<Sprite> {
+    public override createObject(...args: any[]): Sprite {
+        return Sprite.from(args[0]);
     }
 }
 
