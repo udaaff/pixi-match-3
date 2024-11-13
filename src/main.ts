@@ -1,29 +1,30 @@
 import '@pixi/spine-pixi';
 
-// import { ResultScreen } from './screens/ResultScreen';
-// import { TiledBackground } from './ui/TiledBackground';
-// import { getUrlParam } from './utils/getUrlParams';
 import { sound } from '@pixi/sound';
-import { Application, Assets, Sprite, Ticker, WebGLRenderer } from 'pixi.js';
+import { Application, Assets, Ticker, WebGLRenderer } from 'pixi.js';
 
 import { getLevelData, setRawLevelsData } from './model/levels';
-import { getObject, tracePools } from './pool/pool';
+import { tracePools } from './pool/pool';
 import { GameplayProcess } from './process/GameplayProcess';
 import { logProcessInfo } from './process/Process';
 import { addProcess } from './process/processRunner';
-// import { GameScreen } from './screens/GameScreen';
-// import { HomeScreen } from './screens/HomeScreen';
-import { LoadScreen } from './screens/LoadScreen';
 import { initAssets, loadBundles } from './utils/assets';
 import { navigation } from './utils/navigation';
 import { registerPools } from './pool/poolUtil';
 import { Stats } from 'pixi-stats';
+import PixiPlugin from 'gsap/PixiPlugin';
+import gsap from 'gsap';
+import * as PIXI from 'pixi.js';
 
 // The PixiJS app Application instance, shared across the project
 export const app = new Application();
 
 export const gameTicker = new Ticker();
 gameTicker.autoStart = true;
+
+gsap.registerPlugin(PixiPlugin);
+console.log(PIXI)
+PixiPlugin.registerPIXI(PIXI);
 
 // Set up a resize function for the app
 function resize() {

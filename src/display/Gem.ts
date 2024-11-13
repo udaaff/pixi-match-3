@@ -6,6 +6,8 @@ import { EntityID } from "../model/EntityID";
 import { cfg } from "../game/cfg";
 import { getMatchTypeByEntityID } from "../model/matchColor";
 import { getObject } from "../pool/pool";
+import gsap from "gsap";
+import { TweenProcess } from "../process/TweenProcess";
 
 const _GRAPHICS: { [key: number]: string} = {
     [EntityID.GEM_BLUE]: "rune_blue_n",
@@ -66,7 +68,6 @@ export class Gem extends BoardObject {
         this._container.addChild(this._image);
         // this._eyeContainer.addChild(this._eye);
     }
-
 
     public override get highlight(): Sprite | null
     {
