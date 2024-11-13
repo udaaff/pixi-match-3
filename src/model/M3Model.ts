@@ -57,17 +57,17 @@ export class M3Model {
         this.matcher = new Matcher(this);
         this.boardHLength = gameSession.levelData.boardHLength;
         this.boardVLength = gameSession.levelData.boardVLength;
-        this._registeredSpawners = new Array(this.boardVLength).fill([]);
-        this._entrances = new Array(this.boardVLength).fill([]);
-        this._exits = new Array(this.boardVLength).fill([]);
-        this._entranceToTunnel = new Array(this.boardVLength).fill([]);
-        this._exitToTunnel = new Array(this.boardVLength).fill([]);
-        this._tiles = new Array(this.boardVLength).fill([]);
-        this._gems = new Array(this.boardVLength).fill([]);
-        this._freezes = new Array(this.boardVLength).fill([]);
-        this._locks = new Array(this.boardVLength).fill([]);
-        this._bgItems = new Array(this.boardVLength).fill([]);
-        this._crystals = new Array(this.boardVLength).fill([]);
+        this._registeredSpawners = Array.from({ length: this.boardVLength }, () => []);
+        this._entrances = Array.from({ length: this.boardVLength }, () => []);
+        this._exits = Array.from({ length: this.boardVLength }, () => []);
+        this._entranceToTunnel = Array.from({ length: this.boardVLength }, () => []);
+        this._exitToTunnel = Array.from({ length: this.boardVLength }, () => []);
+        this._tiles = Array.from({ length: this.boardVLength }, () => []);
+        this._gems = Array.from({ length: this.boardVLength }, () => []);
+        this._freezes = Array.from({ length: this.boardVLength }, () => []);
+        this._locks = Array.from({ length: this.boardVLength }, () => []);
+        this._bgItems = Array.from({ length: this.boardVLength }, () => []);
+        this._crystals = Array.from({ length: this.boardVLength }, () => []);
         // this.setSpawners(gameSession.levelData.spawners);
         // this.setSpawnData(gameSession.levelData.spawns);
         // this.setWayPoints(gameSession.levelData.wayPoints);
@@ -165,13 +165,13 @@ export class M3Model {
 
         const c1 = gem1.coordinates!;
         const c2 = gem2.coordinates!;
-        return c1.row == c2.row && Math.abs(c1.column - c2.column) == 1
-            || c1.column == c2.column && Math.abs(c1.row - c2.row) == 1;
+        return c1.row === c2.row && Math.abs(c1.column - c2.column) === 1
+            || c1.column === c2.column && Math.abs(c1.row - c2.row) === 1;
     }
 
     public setWayPoints(wayPoints: BoardCoordinates[]): void {
         this._wayPoints = wayPoints;
-        if (!this._wayPoints || this._wayPoints.length == 0)
+        if (!this._wayPoints || this._wayPoints.length === 0)
             throw new Error("No waypoint are defined.");
 
         this.moveViewportTo(this._wayPoints[this._currentWayPointIndex]);
@@ -179,14 +179,14 @@ export class M3Model {
 
     public moveToNextWayPoint(): void {
         this._currentWayPointIndex++;
-        if (this._currentWayPointIndex == this._wayPoints.length)
+        if (this._currentWayPointIndex === this._wayPoints.length)
             throw new Error("Next way point doesn't exist.");
 
         this.moveViewportTo(this._wayPoints[this._currentWayPointIndex]);
     }
 
     public getCurrentWayPoint(): BoardCoordinates | null {
-        if (this._currentWayPointIndex == this._wayPoints.length)
+        if (this._currentWayPointIndex === this._wayPoints.length)
             return null;
 
         return this._wayPoints[this._currentWayPointIndex];
@@ -194,7 +194,7 @@ export class M3Model {
 
     public getNextWayPoint(): BoardCoordinates | null {
         let nextPointIndex:int = this._currentWayPointIndex + 1;
-        if (nextPointIndex == this._wayPoints.length)
+        if (nextPointIndex === this._wayPoints.length)
             return null;
 
         return this._wayPoints[nextPointIndex];
@@ -243,14 +243,14 @@ export class M3Model {
         this._totalWeight = 0;
 
         for (const spawnData of spawns) {
-            if (spawnData.weight == 0)
+            if (spawnData.weight === 0)
                 continue;
 
             this._spawns.push(spawnData);
             this._totalWeight += spawnData.weight;
 
             const matchType = getMatchTypeByEntityID(spawnData.type);
-            if (matchType != ColorType.UNDEFINED)
+            if (matchType !== ColorType.UNDEFINED)
                 this.spawnableMatchTypes.push(matchType);
         }
     }
@@ -322,7 +322,7 @@ export class M3Model {
             for (let j = this.viewport.column; j < jLength; j++) {
                 const matchable = this.getGemAt(i, j);
                 if (!matchable?.isMatchableType() || matchable.isBlocked
-                        || matchable.matchType != matchType)
+                        || matchable.matchType !== matchType)
                     continue;
 
                 return true;
@@ -357,7 +357,7 @@ export class M3Model {
             }
         }
 
-        if (availableTypes.length == 0)
+        if (availableTypes.length === 0)
             return ColorType.NONE;
 
         return getRandomElement(availableTypes)!;
@@ -366,6 +366,7 @@ export class M3Model {
     /** generates entityID according to defined weights */
     public spawn() {
         const r = this._totalWeight * getRandom();
+        console.log(r, this._totalWeight, getRandom())
         let w = 0;
         for (let i:int = 0; i < this._spawns.length; i++) {
             w += this._spawns[i].weight;
@@ -424,7 +425,7 @@ export class M3Model {
             if (path.length > 0 && !wasSlide) {
                 prevPushedPath = path[path.length - 1];
                 // drop unneeded points
-                if (prevPushedPath.column == nextPathPoint.column)
+                if (prevPushedPath.column === nextPathPoint.column)
                     path.pop();
             }
 
@@ -566,7 +567,7 @@ export class M3Model {
 
         let n = 0;
         do {
-            if (++n == MAX_NUMBER_OF_SHUFFLES)
+            if (++n === MAX_NUMBER_OF_SHUFFLES)
                 throw new Error("Reached max number of shuffles");
 
             shuffle(coordinates);
@@ -755,21 +756,21 @@ export class M3Model {
     public gemFrozen(gem: BoardObject): boolean {
         if (!gem.coordinates) return false;
 
-        return this._freezes[gem.coordinates.row][gem.coordinates.column].isFrozen;
+        return this._freezes[gem.coordinates.row][gem.coordinates.column]?.isFrozen ?? false;
     }
 
     public gemLocked(gem: BoardObject): boolean {
         if (!gem.coordinates) return false;
 
-        return this._locks[gem.coordinates.row][gem.coordinates.column].isLock;
+        return this._locks[gem.coordinates.row][gem.coordinates.column]?.isLock ?? false;
     }
 
     public hasFreezeAt(row:int, column:int): boolean {
-        return this._freezes[row][column].isFrozen;
+        return this._freezes[row][column]?.isFrozen ?? false;
     }
 
     public hasLockAt(row: int, column: int): boolean {
-        return this._locks[row][column].isLock;
+        return this._locks[row][column]?.isLock ?? false;
     }
 
     public hasBomb(): boolean {
@@ -1051,7 +1052,7 @@ export class M3Model {
                 if (!gem?.isMatchableType())
                     continue;
 
-                if (gem && gem.matchType == matchType && !gem.isBlocked)
+                if (gem && gem.matchType === matchType && !gem.isBlocked)
                     result.push(gem);
             }
         }

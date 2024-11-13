@@ -1,4 +1,4 @@
-import { Container } from "pixi.js";
+import { Container, Sprite } from "pixi.js";
 
 import { BoardCoordinates } from "../model/BoardCoordinates";
 import { EntityID } from "../model/EntityID";
@@ -30,6 +30,7 @@ export interface BoardObjectParams {
     isGem?: boolean;
     isSleepable?: boolean;
     isAffectable?: boolean;
+    isCollectable?: boolean;
     isFrozen?: boolean;
     isLock?: boolean;
     isKey?: boolean;
@@ -50,6 +51,7 @@ export abstract class BoardObject extends Container implements PoolClient {
     public readonly isKey: boolean;
     public readonly isAffectable: boolean;
     public readonly isSoil: boolean;
+    public readonly isCollectable: boolean;
 
     public isBlocked = false;
     public coordinates: BoardCoordinates | null = null;
@@ -65,6 +67,7 @@ export abstract class BoardObject extends Container implements PoolClient {
         this.isKey = params?.isKey ?? false;
         this.isSoil = params?.isSoil ?? false;
         this.isAffectable = params?.isAffectable ?? false;
+        this.isCollectable = params?.isCollectable ?? false;
         this.entityID = params?.entityID ?? EntityID.ENTITY_NONE;
     }
 
@@ -89,4 +92,9 @@ export abstract class BoardObject extends Container implements PoolClient {
 
     public get numLives(): int { return this._numLives; }
     public set numLives(_value: int) { }
+
+    public get highlightAlpha(): Number { return 0; }
+    public set highlightAlpha(_value: Number) { }
+
+    public get highlight(): Sprite | null { return null; }
 }

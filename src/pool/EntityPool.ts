@@ -41,19 +41,19 @@ export class EntityPool<T> implements IPool<T> {
         let pool = this._idToPool.get(id);
         if (!pool) {
             pool = [];
-            console.log(`[Pool] ${this._creator.objectClass} URI: ${id} created.`);
+            console.log(`[Pool] ${this._creator.objectClass.name} URI: ${id} created.`);
             this._idToPool.set(id, pool);
             this._idToObjects.set(id, new Map());
         }
 
         if (pool.length > 0) {
             object = pool.pop() as T;
-            console.log(`[Pool] <<< Get object from pool ${this._creator.objectClass} URI: ${id}. Length ${pool.length}`);
+            console.log(`[Pool] <<< Get object from pool ${this._creator.objectClass.name} URI: ${id}. Length ${pool.length}`);
             this._idToObjects.delete(id);
         }
         else {
             object = this._creator.createObject(id);
-            console.log(`[Pool] +++ Create object ${this._creator.objectClass} URI: ${id}`);
+            console.log(`[Pool] +++ Create object ${this._creator.objectClass.name} URI: ${id}`);
         }
 
         this._n++;
@@ -65,7 +65,7 @@ export class EntityPool<T> implements IPool<T> {
         if (objects?.get(object))
             return;
 
-        console.log(`[Pool] --- Dispose object ${this._creator.objectClass} URI: ${id}. Length ${this._idToPool.get(id)!.length}`);
+        console.log(`[Pool] --- Dispose object ${this._creator.objectClass.name} URI: ${id}. Length ${this._idToPool.get(id)!.length}`);
         this._n--;
 
         this._idToPool.get(id)!.push(object);
@@ -77,7 +77,7 @@ export class EntityPool<T> implements IPool<T> {
         for (const pool of this._idToPool) {
             length += pool.length;
         }
-        return `[Pool] Type ${this._creator.objectClass}. Length ${length}. Out of pool ${this._n}`;
+        return `[Pool] Type ${this._creator.objectClass.name}. Length ${length}. Out of pool ${this._n}`;
     }
 }
 

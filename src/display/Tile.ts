@@ -9,6 +9,7 @@ export class Tile extends BoardObject {
 
         const tile = Sprite.from("floor_g");
         tile.setSize(cfg.boardCellWidth, cfg.boardCellHeight);
+        tile.alpha = 0.5;
         this.addChild(tile);
     }
 }
