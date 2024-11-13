@@ -2,6 +2,7 @@ import { centerObjectAt } from "../display/Board";
 import { BoardObject } from "../display/BoardObject";
 import { Gem } from "../display/Gem";
 import { Sand } from "../display/Sand";
+import { Soil } from "../display/Soil";
 import { cfg } from "../game/cfg";
 import { BoardCoordinates } from "../model/BoardCoordinates";
 import { getBombTypeByEntityID } from "../model/BombType";
@@ -50,8 +51,8 @@ export class InitializeBoard extends GameplayInternal {
                 let boardObject: BoardObject | null = null;
 
                 if (tileData.block != EntityID.ENTITY_NONE) {
-        //             if (tileData.block == EntityID.BLOCK_SOIL)
-        //                 boardObject = M3Pool.getSoil(tileData.block);
+                    if (tileData.block == EntityID.BLOCK_SOIL)
+                        boardObject = getObject(Soil, tileData.block);
         //             else if (tileData.block == EntityID.BLOCK_SOIL_KEY)
         //                 boardObject = M3Pool.getBarrelBomb(tileData.block);
         //             else
@@ -124,7 +125,7 @@ export class InitializeBoard extends GameplayInternal {
         }
 
         let n: int = 0;
-        const viewport = new Viewport(0, 0, iLength, jLength);
+        const viewport = new Viewport(iLength, jLength);
         const matcher = this.ctx.model.matcher;
         while (!matcher.hasMove() || matcher.hasMatch(viewport)) {
             if (++n == cfg.maxShuffleAttemps)
@@ -136,6 +137,7 @@ export class InitializeBoard extends GameplayInternal {
                 this.ctx.model.registerGemAt(randomGems[i], coordinates[i].row, coordinates[i].column);
             }
         }
+        console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXX ", n)
 
         for (let i = 0; i < iLength; i++) {
             for (let j = 0; j < jLength; j++) {

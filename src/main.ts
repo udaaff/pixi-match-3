@@ -112,8 +112,8 @@ async function init() {
     console.log(levels)
 
     setRawLevelsData(levels);
-    console.log(getLevelData(0));
-    addProcess(new GameplayProcess(0), 'app');
+    console.log(getLevelData(1));
+    addProcess(new GameplayProcess(1), 'app');
 }
 
 // Init everything

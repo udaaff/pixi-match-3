@@ -23,6 +23,10 @@ export interface HasEye extends BoardObject {
     getEye(): Eye;
 }
 
+export interface HasCrystal extends BoardObject {
+    removeCrystal(): void;
+}
+
 export interface BoardObjectParams {
     isMoveable?: boolean;
     isMatchable?: boolean;
@@ -36,6 +40,7 @@ export interface BoardObjectParams {
     isKey?: boolean;
     isSoil?: boolean;
     hasEye?: boolean;
+    hasCrystal?: boolean;
     entityID: int;
 }
 
@@ -44,6 +49,7 @@ export abstract class BoardObject extends Container implements PoolClient {
     private readonly _isMatchable: boolean;
     private readonly _isSleepable: boolean;
     private readonly _hasEye: boolean;
+    private readonly _hasCrystal: boolean;
     protected _numLives: int = 1;
     public readonly isFrozen: boolean;
     public readonly isLock: boolean;
@@ -62,6 +68,7 @@ export abstract class BoardObject extends Container implements PoolClient {
         this._isMatchable = params?.isMatchable ?? false;
         this._isSleepable = params?.isSleepable ?? false;
         this._hasEye = params?.hasEye ?? false;
+        this._hasCrystal = params?.hasCrystal ?? false;
         this.isFrozen = params?.isFrozen ?? false;
         this.isLock = params?.isLock ?? false;
         this.isKey = params?.isKey ?? false;
@@ -85,6 +92,10 @@ export abstract class BoardObject extends Container implements PoolClient {
 
     public isEyeType(): this is HasEye {
         return this._hasEye;
+    }
+
+    public isCrystalType(): this is HasCrystal {
+        return this._hasCrystal;
     }
 
     public onGetFromPool(): void { }
