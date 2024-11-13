@@ -4,7 +4,7 @@ import '@pixi/spine-pixi';
 // import { TiledBackground } from './ui/TiledBackground';
 // import { getUrlParam } from './utils/getUrlParams';
 import { sound } from '@pixi/sound';
-import { Application, Assets, Sprite, Ticker } from 'pixi.js';
+import { Application, Assets, Sprite, Ticker, WebGLRenderer } from 'pixi.js';
 
 import { getLevelData, setRawLevelsData } from './model/levels';
 import { getObject, tracePools } from './pool/pool';
@@ -17,6 +17,7 @@ import { LoadScreen } from './screens/LoadScreen';
 import { initAssets, loadBundles } from './utils/assets';
 import { navigation } from './utils/navigation';
 import { registerPools } from './pool/poolUtil';
+import { Stats } from 'pixi-stats';
 
 // The PixiJS app Application instance, shared across the project
 export const app = new Application();
@@ -66,6 +67,7 @@ async function init() {
         resolution: Math.max(window.devicePixelRatio, 2),
         backgroundColor: 0xffffff,
     });
+    app.ticker.maxFPS = 60;
 
     // Add pixi canvas element (app.canvas) to the document's body
     document.body.appendChild(app.canvas);
@@ -81,31 +83,16 @@ async function init() {
 
     // Setup assets bundles (see assets.ts) and start up loading everything in background
     await initAssets();
-    await loadBundles("board-objects");
+    await loadBundles(["board-objects", "levels"]);
 
 
-    // new SerialProcess([
-    //     new Wait(2000),
-    //     new Wait(1000),
-    //     new Wait(3000),
-    //     new ParallelProcess([
-    //         new Wait(5000),
-    //         new Wait(10000)
-    //     ])
-    // ], 1000).start();
-    // addProcess(new Wait(2000), "app", true);
-    // addProcess(new Wait(2000), "game", true);
-    // addProcess(new Wait(2000), "game", false);
-    // addProcess(new Wait(2000), "game", false);
-    // new Wait(15000).start();
-    // new Wait(115000).start();
-    // new Wait(125000).start();
+    const stats = new Stats(app.renderer as WebGLRenderer);
+
     logProcessInfo();
     // // Show initial loading screen
-    await navigation.showScreen(LoadScreen);
+    // await navigation.showScreen(LoadScreen);
 
     registerPools();
-    // const s = getObject(Sprite)
     tracePools();
 
     const levels = Assets.get("levels.json");
