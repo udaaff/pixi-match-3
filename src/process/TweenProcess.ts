@@ -3,10 +3,10 @@ import { removeElementAt } from "../utils/arrayUtils";
 import { Process } from "./Process";
 
 // target -> [ tween, tween, ... , tween ]
-const _targetToActiveActionMap = new Map<any, TweenProcess[]>();
+const targetToActiveTweenMap = new Map<any, TweenProcess[]>();
 
 export function stopTweensOf(target: any): void {
-    const tweens = _targetToActiveActionMap.get(target);
+    const tweens = targetToActiveTweenMap.get(target);
     if (!tweens || tweens.length == 0)
         return;
 
@@ -38,10 +38,10 @@ export class TweenProcess extends Process {
      * 3. We push the current tween into the array.
      */
     protected override onStart(): void {
-        let tweens = _targetToActiveActionMap.get(this._target);
+        let tweens = targetToActiveTweenMap.get(this._target);
         if (!tweens) {
             tweens = [];
-            _targetToActiveActionMap.set(this._target, tweens);
+            targetToActiveTweenMap.set(this._target, tweens);
         }
 
         const length = tweens.length;
@@ -70,7 +70,7 @@ export class TweenProcess extends Process {
         this._tween?.kill()
         this._tween = null;
 
-        const tweens = _targetToActiveActionMap.get(this._target);
+        const tweens = targetToActiveTweenMap.get(this._target);
         if (!tweens)
             throw new Error("No tweens were specified");
 
@@ -83,7 +83,7 @@ export class TweenProcess extends Process {
         if (this._onCompleteCallback)
             this._onCompleteCallback.apply(null, args);
 
-        const tweens = _targetToActiveActionMap.get(this._target);
+        const tweens = targetToActiveTweenMap.get(this._target);
         if (!tweens)
             throw new Error("Twween is alive, but no tweens were registered");
 

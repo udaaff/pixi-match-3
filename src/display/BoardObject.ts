@@ -27,10 +27,23 @@ export interface HasCrystal extends BoardObject {
     removeCrystal(): void;
 }
 
+export interface IBomb extends BoardObject {
+    get bombType(): int;
+    set bombType(value: int);
+    get triggerMatchType(): int;
+    set triggerMatchType(value: int);
+    get auto(): Boolean;
+    set auto(value: Boolean);
+    get last(): Boolean;
+    set last(value: Boolean);
+    startBlinking(): void;
+}
+
 export interface BoardObjectParams {
     isMoveable?: boolean;
     isMatchable?: boolean;
     isHBomb?: boolean;
+    isBomb?: boolean;
     isGem?: boolean;
     isSleepable?: boolean;
     isAffectable?: boolean;
@@ -39,6 +52,8 @@ export interface BoardObjectParams {
     isLock?: boolean;
     isKey?: boolean;
     isSoil?: boolean;
+    isSquareBomb5x5?: boolean;
+    isSquareBomb3x3?: boolean;
     hasEye?: boolean;
     hasCrystal?: boolean;
     entityID: int;
@@ -49,6 +64,7 @@ export abstract class BoardObject extends Container implements PoolClient {
     private readonly _isMatchable: boolean;
     private readonly _isSleepable: boolean;
     private readonly _hasEye: boolean;
+    private readonly _isBomb: boolean;
     private readonly _hasCrystal: boolean;
     protected _numLives: int = 1;
     public readonly isFrozen: boolean;
@@ -58,6 +74,8 @@ export abstract class BoardObject extends Container implements PoolClient {
     public readonly isAffectable: boolean;
     public readonly isSoil: boolean;
     public readonly isCollectable: boolean;
+    public readonly isSquareBomb5x5: boolean;
+    public readonly isSquareBomb3x3: boolean;
 
     public isBlocked = false;
     public coordinates: BoardCoordinates | null = null;
@@ -69,12 +87,15 @@ export abstract class BoardObject extends Container implements PoolClient {
         this._isSleepable = params?.isSleepable ?? false;
         this._hasEye = params?.hasEye ?? false;
         this._hasCrystal = params?.hasCrystal ?? false;
+        this._isBomb = params?.isBomb ?? false;
         this.isFrozen = params?.isFrozen ?? false;
         this.isLock = params?.isLock ?? false;
         this.isKey = params?.isKey ?? false;
         this.isSoil = params?.isSoil ?? false;
         this.isAffectable = params?.isAffectable ?? false;
         this.isCollectable = params?.isCollectable ?? false;
+        this.isSquareBomb3x3 = params?.isSquareBomb3x3 ?? false;
+        this.isSquareBomb5x5 = params?.isSquareBomb5x5 ?? false;
         this.entityID = params?.entityID ?? EntityID.ENTITY_NONE;
     }
 
@@ -88,6 +109,10 @@ export abstract class BoardObject extends Container implements PoolClient {
 
     public isSleepableType(): this is Sleepable {
         return this._isSleepable;
+    }
+
+    public isBombType(): this is IBomb {
+        return this._isBomb;
     }
 
     public isEyeType(): this is HasEye {

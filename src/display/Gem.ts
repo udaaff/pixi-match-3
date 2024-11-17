@@ -9,7 +9,7 @@ import { getObject } from "../pool/pool";
 import gsap from "gsap";
 import { TweenProcess } from "../process/TweenProcess";
 
-const _GRAPHICS: { [key: number]: string} = {
+const _GRAPHICS: { [key: number]: string } = {
     [EntityID.GEM_BLUE]: "rune_blue_n",
     [EntityID.GEM_GREEN]: "rune_green_n",
     [EntityID.GEM_ORANGE]: "rune_orange_n",
