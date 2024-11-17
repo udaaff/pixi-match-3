@@ -87,7 +87,7 @@ export class Matcher {
                     match.direction = Match.VERTICAL_HORIZONTAL;
 
                     for (const gem of vMatch) {
-                        if (match.trigger != gem)
+                        if (match.trigger !== gem)
                             match.gems.push(gem);
                     }
 
@@ -122,9 +122,9 @@ export class Matcher {
                 if (match.trigger)
                     continue;
 
-                if (trigger1 && match.gems.indexOf(trigger1) != -1)
+                if (trigger1 && match.gems.indexOf(trigger1) !== -1)
                     match.trigger = trigger1;
-                else if (trigger2 && match.gems.indexOf(trigger2) != -1)
+                else if (trigger2 && match.gems.indexOf(trigger2) !== -1)
                     match.trigger = trigger2;
                 else
                     match.trigger = match.gems[0]; // на случай, если был достигнут потолок перестановок
@@ -337,7 +337,7 @@ export class Matcher {
 
         // Элемент (0) составляющий с элементом X базовую комбинацию. Может быть заморожен.
         const gem0 = this._model.getGemAt(row + pattern[0][0], column + pattern[0][1], true);
-        if (!gem0?.isMatchableType() || gem0.isBlocked || this._model.gemLocked(gem0) || gem0.matchType != baseMatchType)
+        if (!gem0?.isMatchableType() || gem0.isBlocked || this._model.gemLocked(gem0) || gem0.matchType !== baseMatchType)
             return null;
 
         // Прочие элементы для свопа. Не должны быть заморожены или залочены.
@@ -406,7 +406,7 @@ export class Matcher {
 
         // Элемент (0) составляющий с элементом X базовую комбинацию. Может быть заморожен.
         const gem0 = this._model.getGemAt(row + pattern[0][0], column + pattern[0][1], true);
-        if (!gem0?.isMatchableType() || gem0.isBlocked || this._model.gemLocked(gem0) || gem0.matchType != baseMatchType)
+        if (!gem0?.isMatchableType() || gem0.isBlocked || this._model.gemLocked(gem0) || gem0.matchType !== baseMatchType)
             return null;
 
         // Прочие элементы для свопа. Не должны быть заморожены или залочены.
@@ -441,7 +441,7 @@ export class Matcher {
         const length: int = viewport.row + viewport.vLength;
         for (let i: int = row + 1; i < length; i++) {
             const gem = this._model.getGemAt(i, column);
-            if (!gem?.isMatchableType() || this._model.gemLocked(gem) || gem.matchType != baseMatchType)
+            if (!gem?.isMatchableType() || this._model.gemLocked(gem) || gem.matchType !== baseMatchType)
                 break;
 
             match.push(gem);
@@ -466,7 +466,7 @@ export class Matcher {
         const length: int = viewport.column + viewport.hLength;
         for (let j: int = column + 1; j < length; j++) {
             const gem = this._model.getGemAt(row, j);
-            if (!gem?.isMatchableType() || this._model.gemLocked(gem) || gem.matchType != baseMatchType)
+            if (!gem?.isMatchableType() || this._model.gemLocked(gem) || gem.matchType !== baseMatchType)
                 break;
 
             match.push(gem);

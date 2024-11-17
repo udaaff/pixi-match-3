@@ -2,6 +2,7 @@ import { BarrelBomb } from "../display/BarrelBomb";
 import { centerObjectAt } from "../display/Board";
 import { BoardObject } from "../display/BoardObject";
 import { Gem } from "../display/Gem";
+import { Lock } from "../display/Lock";
 import { Sand } from "../display/Sand";
 import { Soil } from "../display/Soil";
 import { cfg } from "../game/cfg";
@@ -51,7 +52,7 @@ export class InitializeBoard extends GameplayInternal {
 
                 let boardObject: BoardObject | null = null;
 
-                if (tileData.block != EntityID.ENTITY_NONE) {
+                if (tileData.block !== EntityID.ENTITY_NONE) {
                     if (tileData.block == EntityID.BLOCK_SOIL)
                         boardObject = getObject(Soil, tileData.block);
                     else if (tileData.block == EntityID.BLOCK_SOIL_KEY)
@@ -59,7 +60,7 @@ export class InitializeBoard extends GameplayInternal {
         //             else
         //                 boardObject = M3Pool.getStone(tileData.block);
                 }
-                else if (tileData.bomb != EntityID.ENTITY_NONE) {
+                else if (tileData.bomb !== EntityID.ENTITY_NONE) {
                     const bombType: int = getBombTypeByEntityID(tileData.bomb);
                     let bombEntityID: int;
                     let matchType: int;
@@ -89,7 +90,7 @@ export class InitializeBoard extends GameplayInternal {
         //             else if (bombType == BombType.SQUARE_3x3)
         //                 boardObject = M3Pool.getSquareBomb(bombEntityID);
                 }
-                else if (tileData.gem != EntityID.ENTITY_NONE) {
+                else if (tileData.gem !== EntityID.ENTITY_NONE) {
         //             boardObject = M3Pool.getGem(tileData.gem);
                 }
                 else if (!tileData.empty) {
@@ -103,21 +104,21 @@ export class InitializeBoard extends GameplayInternal {
                     boardObject = null;
                 }
 
-                if (tileData.freeze != EntityID.ENTITY_NONE) {
+                if (tileData.freeze !== EntityID.ENTITY_NONE) {
         //             let freeze: IBoardObject = M3Pool.getFreeze(tileData.freeze);
         //             this.ctx.model.registerFreezeAt(freeze, i, j);
         //             centerObjectAt(freeze, i, j);
         //             this.ctx.view.freezesContainer.addChild(freeze as DisplayObject);
                 }
 
-                if (tileData.lock != EntityID.ENTITY_NONE) {
-        //             let lock: IBoardObject = M3Pool.getLock(tileData.lock);
-        //             this.ctx.model.registerLockAt(lock, i, j);
-        //             centerObjectAt(lock, i, j);
-        //             this.ctx.view.locksContainer.addChild(lock as DisplayObject);
+                if (tileData.lock !== EntityID.ENTITY_NONE) {
+                    const lock = getObject(Lock, tileData.lock);
+                    this.ctx.model.registerLockAt(lock, i, j);
+                    centerObjectAt(lock, i, j);
+                    this.ctx.view.locksContainer.addChild(lock);
                 }
 
-                if (tileData.crystal != EntityID.ENTITY_NONE) {
+                if (tileData.crystal !== EntityID.ENTITY_NONE) {
         //             let soil: Soil = Soil(this.ctx.model.getGemAt(i, j));
         //             let crystal: Crystal = soil.addCrystal(tileData.crystal);
         //             this.ctx.model.registerCrystalAt(crystal, i, j);

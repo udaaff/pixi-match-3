@@ -94,14 +94,16 @@ async function init() {
     // await navigation.showScreen(LoadScreen);
 
     registerPools();
-    tracePools();
 
     const levels = Assets.get("levels.json");
     console.log(levels)
 
     setRawLevelsData(levels);
     console.log(getLevelData(1));
-    addProcess(new GameplayProcess(1), 'app');
+    addProcess(new GameplayProcess(2), 'app');
+
+    tracePools();
+
 }
 
 // Init everything

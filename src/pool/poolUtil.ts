@@ -5,10 +5,12 @@ import { getObject, registerPool } from "./pool";
 import { Gem } from "../display/Gem";
 import { Soil } from "../display/Soil";
 import { BarrelBomb } from "../display/BarrelBomb";
+import { Lock } from "../display/Lock";
 
 export function registerPools() {
     registerPool(new EntityPool(new Creator(Sand)), Sand);
     registerPool(new EntityPool(new Creator(Soil)), Soil);
+    registerPool(new EntityPool(new Creator(Lock)), Lock);
     registerPool(new EntityPool(new Creator(BarrelBomb)), BarrelBomb);
     registerPool(new EntityPool(new Creator(Gem)), Gem);
     registerPool(new EntityPool(new SpriteCreator(Sprite)), Sprite);

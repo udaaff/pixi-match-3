@@ -79,7 +79,7 @@ export class GameSessionData {
 
     public allTargetsDone(): boolean {
         for (const targetData of this.targets) {
-            if (targetData.amount != 0)
+            if (targetData.amount !== 0)
                 return false;
         }
         return true;
