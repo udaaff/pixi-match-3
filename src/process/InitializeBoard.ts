@@ -1,3 +1,4 @@
+import { BarrelBomb } from "../display/BarrelBomb";
 import { centerObjectAt } from "../display/Board";
 import { BoardObject } from "../display/BoardObject";
 import { Gem } from "../display/Gem";
@@ -53,8 +54,8 @@ export class InitializeBoard extends GameplayInternal {
                 if (tileData.block != EntityID.ENTITY_NONE) {
                     if (tileData.block == EntityID.BLOCK_SOIL)
                         boardObject = getObject(Soil, tileData.block);
-        //             else if (tileData.block == EntityID.BLOCK_SOIL_KEY)
-        //                 boardObject = M3Pool.getBarrelBomb(tileData.block);
+                    else if (tileData.block == EntityID.BLOCK_SOIL_KEY)
+                        boardObject = getObject(BarrelBomb, tileData.block);
         //             else
         //                 boardObject = M3Pool.getStone(tileData.block);
                 }

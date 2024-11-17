@@ -3,6 +3,7 @@ import { int } from "../utils/integer";
 import { BoardObject, BoardObjectParams, IBomb, Matchable } from "./BoardObject";
 import { ParallelProcess } from "../process/ParallelProcess";
 import { getMatchTypeByEntityID } from "../model/matchColor";
+import { cfg } from "../game/cfg";
 
 export abstract class Bomb extends BoardObject implements IBomb, Matchable {
     public isLast = false;
@@ -32,7 +33,8 @@ export abstract class Bomb extends BoardObject implements IBomb, Matchable {
 
         this._imageTN = this._entityIDToTextureName[this.entityID];
         this._image = Sprite.from(this._imageTN);
-        this._image.pivot.set(0.5);
+        this._image.anchor.set(0.5);
+        this._image.setSize(cfg.boardCellWidth, cfg.boardCellHeight);
         this._container.addChild(this._image);
     }
 
