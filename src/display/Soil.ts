@@ -6,7 +6,7 @@ import { cfg } from "../game/cfg";
 import { getObject } from "../pool/pool";
 
 const MIN_SOIL_ID: int = 1;
-const MAX_SOIL_ID: int = 4;
+const MAX_SOIL_ID: int = 8;
 
 export class Soil extends BoardObject implements HasCrystal {
     private _container: Container;
@@ -21,7 +21,7 @@ export class Soil extends BoardObject implements HasCrystal {
             hasCrystal: true,
         });
 
-        const textureName = `stones_b_0${(MIN_SOIL_ID + getRandomUint(MAX_SOIL_ID))}`;
+        const textureName = `soil_000${(MIN_SOIL_ID + getRandomUint(MAX_SOIL_ID))}`;
 
         this._mc = Sprite.from(textureName);
         this._mc.setSize(cfg.boardCellWidth, cfg.boardCellHeight);

@@ -11,7 +11,7 @@ export class BarrelBomb extends Bomb {
             isSquareBomb5x5: true,
             isGem: true,
             isKey: true,
-        }, { [EntityID.BLOCK_SOIL_KEY]: "swirl" });
+        }, { [EntityID.BLOCK_SOIL_KEY]: "barrel" });
 
         this.bombType = BombType.SQUARE_5x5;
     }

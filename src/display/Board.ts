@@ -66,7 +66,7 @@ export class Board extends Container {
 
     constructor() {
         super();
-        this.scale.set(0.3)
+        // this.scale.set(0.5)
         this.addChild(this.tilesContainer);
         this.addChild(this.rockTilesContainer);
         this.addChild(this.bgItemsContainer);

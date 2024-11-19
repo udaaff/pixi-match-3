@@ -10,12 +10,12 @@ import gsap from "gsap";
 import { TweenProcess } from "../process/TweenProcess";
 
 const _GRAPHICS: { [key: number]: string } = {
-    [EntityID.GEM_BLUE]: "rune_blue_n",
-    [EntityID.GEM_GREEN]: "rune_green_n",
-    [EntityID.GEM_ORANGE]: "rune_orange_n",
-    [EntityID.GEM_PURPLE]: "rune_purple_n",
-    [EntityID.GEM_RED]: "rune_red_n",
-    [EntityID.GEM_YELLOW]: "rune_yellow_n",
+    [EntityID.GEM_BLUE]: "g21",
+    [EntityID.GEM_GREEN]: "g22",
+    [EntityID.GEM_ORANGE]: "g23",
+    [EntityID.GEM_PURPLE]: "g24",
+    [EntityID.GEM_RED]: "g25",
+    [EntityID.GEM_YELLOW]: "g26",
 }
 
 export class Gem extends BoardObject {

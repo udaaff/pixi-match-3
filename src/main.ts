@@ -15,6 +15,7 @@ import { Stats } from 'pixi-stats';
 import PixiPlugin from 'gsap/PixiPlugin';
 import gsap from 'gsap';
 import * as PIXI from 'pixi.js';
+import { LoadScreen } from './screens/LoadScreen';
 
 // The PixiJS app Application instance, shared across the project
 export const app = new Application();
@@ -84,14 +85,13 @@ async function init() {
 
     // Setup assets bundles (see assets.ts) and start up loading everything in background
     await initAssets();
-    await loadBundles(["board-objects", "levels"]);
-
+    await loadBundles(["board-objects", "levels", "game"]);
 
     const stats = new Stats(app.renderer as WebGLRenderer);
 
     logProcessInfo();
-    // // Show initial loading screen
-    // await navigation.showScreen(LoadScreen);
+    // Show initial loading screen
+    await navigation.showScreen(LoadScreen);
 
     registerPools();
 
@@ -99,9 +99,8 @@ async function init() {
     console.log(levels)
 
     setRawLevelsData(levels);
-    console.log(getLevelData(1));
 
-    const gameplay = new GameplayProcess(2)
+    const gameplay = new GameplayProcess(1)
     addProcess(gameplay, 'app');
 
     tracePools();

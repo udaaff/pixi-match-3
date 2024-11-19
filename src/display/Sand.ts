@@ -34,7 +34,6 @@ export class Sand extends BoardObject {
 
         this._lifeToIDMap = _numLivesToIDs[this._numLives];
         this._defaultNumLives = this._numLives;
-        // this.updateImage();
     }
 
     private updateImage(): void {
@@ -46,7 +45,7 @@ export class Sand extends BoardObject {
         if (!this._lifeToIDMap || !this._lifeToIDMap[this._numLives])
             throw new Error(`There is no map for id ${this.entityID}`);
 
-        this._imageTN = `sand_${this._lifeToIDMap[this._numLives]}`;
+        this._imageTN = `sand_000${this._lifeToIDMap[this._numLives]}`;
         this._image = getObject(Sprite, this._imageTN);
         this._image.setSize(
             cfg.boardCellWidth, cfg.boardCellHeight

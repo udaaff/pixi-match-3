@@ -7,7 +7,7 @@ export class Tile extends BoardObject {
     constructor() {
         super();
 
-        const tile = Sprite.from("floor_g");
+        const tile = Sprite.from("tile");
         tile.setSize(cfg.boardCellWidth, cfg.boardCellHeight);
         tile.alpha = 0.5;
         this.addChild(tile);
