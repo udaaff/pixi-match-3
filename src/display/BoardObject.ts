@@ -66,7 +66,6 @@ export abstract class BoardObject extends Container implements PoolClient {
     private readonly _hasEye: boolean;
     private readonly _isBomb: boolean;
     private readonly _hasCrystal: boolean;
-    protected _numLives: int = 1;
     public readonly isFrozen: boolean;
     public readonly isLock: boolean;
     public readonly entityID: int;
@@ -76,9 +75,9 @@ export abstract class BoardObject extends Container implements PoolClient {
     public readonly isCollectable: boolean;
     public readonly isSquareBomb5x5: boolean;
     public readonly isSquareBomb3x3: boolean;
-
-    public isBlocked = false;
     public coordinates: BoardCoordinates | null = null;
+    protected _numLives = 1;
+    protected _isBlocked = false;
 
     constructor(params?: BoardObjectParams) {
         super();
@@ -123,8 +122,19 @@ export abstract class BoardObject extends Container implements PoolClient {
         return this._hasCrystal;
     }
 
-    public onGetFromPool(): void { }
+    public onGetFromPool(): void {
+        this.scale.set(1);
+        this.alpha = 1;
+        this.rotation = 0;
+        this.position.set(0);
+        this._isBlocked = false;
+        this._numLives = 1;
+        this.coordinates = null;
+    }
     public onDisposeToPool(): void { }
+
+    public get isBlocked(): boolean { return this._isBlocked }
+    public set isBlocked(_value: boolean) {}
 
     public get numLives(): int { return this._numLives; }
     public set numLives(_value: int) { }

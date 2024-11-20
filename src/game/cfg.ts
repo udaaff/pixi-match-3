@@ -23,4 +23,6 @@ export const cfg = {
     boardCellHeight: 68,
 
     maxShuffleAttemps: 1000,
+
+    hintDuration: 0.3,
 };

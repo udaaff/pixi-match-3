@@ -24,7 +24,6 @@ export const gameTicker = new Ticker();
 gameTicker.autoStart = true;
 
 gsap.registerPlugin(PixiPlugin);
-console.log(PIXI)
 PixiPlugin.registerPIXI(PIXI);
 
 // Set up a resize function for the app
