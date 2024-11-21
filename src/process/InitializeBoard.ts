@@ -5,6 +5,7 @@ import { Gem } from "../display/Gem";
 import { Lock } from "../display/Lock";
 import { Sand } from "../display/Sand";
 import { Soil } from "../display/Soil";
+import { Stone } from "../display/Stone";
 import { cfg } from "../game/cfg";
 import { BoardCoordinates } from "../model/BoardCoordinates";
 import { getBombTypeByEntityID } from "../model/BombType";
@@ -57,8 +58,8 @@ export class InitializeBoard extends GameplayInternal {
                         boardObject = getObject(Soil, tileData.block);
                     else if (tileData.block == EntityID.BLOCK_SOIL_KEY)
                         boardObject = getObject(BarrelBomb, tileData.block);
-        //             else
-        //                 boardObject = M3Pool.getStone(tileData.block);
+                    else
+                        boardObject = getObject(Stone, tileData.block);
                 }
                 else if (tileData.bomb !== EntityID.ENTITY_NONE) {
                     const bombType: int = getBombTypeByEntityID(tileData.bomb);
