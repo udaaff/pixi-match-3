@@ -99,7 +99,7 @@ async function init() {
 
     setRawLevelsData(levels);
 
-    const gameplay = new GameplayProcess(1)
+    const gameplay = new GameplayProcess(0)
     addProcess(gameplay, 'app');
 
     tracePools();

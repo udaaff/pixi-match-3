@@ -7,9 +7,11 @@ import { Soil } from "../display/Soil";
 import { BarrelBomb } from "../display/BarrelBomb";
 import { Lock } from "../display/Lock";
 import { Stone } from "../display/Stone";
+import { Freeze } from "../display/Freeze";
 
 export function registerPools() {
     registerPool(new EntityPool(new Creator(Stone)), Stone);
+    registerPool(new EntityPool(new Creator(Freeze)), Freeze);
     registerPool(new EntityPool(new Creator(Sand)), Sand);
     registerPool(new EntityPool(new Creator(Soil)), Soil);
     registerPool(new EntityPool(new Creator(Lock)), Lock);

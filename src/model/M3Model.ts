@@ -756,7 +756,7 @@ export class M3Model {
     public gemFrozen(gem: BoardObject): boolean {
         if (!gem.coordinates) return false;
 
-        return this._freezes[gem.coordinates.row][gem.coordinates.column]?.isFrozen ?? false;
+        return this._freezes[gem.coordinates.row][gem.coordinates.column]?.isFreeze ?? false;
     }
 
     public gemLocked(gem: BoardObject): boolean {
@@ -766,7 +766,7 @@ export class M3Model {
     }
 
     public hasFreezeAt(row:int, column:int): boolean {
-        return this._freezes[row][column]?.isFrozen ?? false;
+        return this._freezes[row][column]?.isFreeze ?? false;
     }
 
     public hasLockAt(row: int, column: int): boolean {

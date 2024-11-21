@@ -62,7 +62,8 @@ export class Board extends Container {
     public readonly soilContainer = new Container();
     public readonly gemsContainer = new Container();
     public readonly bgItemsContainer = new Container();
-    public readonly locksContainer = new Container()
+    public readonly locksContainer = new Container();
+    public readonly freezesContainer = new Container();
 
     constructor() {
         super();
@@ -73,5 +74,6 @@ export class Board extends Container {
         this.addChild(this.soilContainer);
         this.addChild(this.gemsContainer);
         this.addChild(this.locksContainer);
+        this.addChild(this.freezesContainer);
     }
 }

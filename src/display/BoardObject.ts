@@ -48,7 +48,7 @@ export interface BoardObjectParams {
     isSleepable?: boolean;
     isAffectable?: boolean;
     isCollectable?: boolean;
-    isFrozen?: boolean;
+    isFreeze?: boolean;
     isLock?: boolean;
     isKey?: boolean;
     isSoil?: boolean;
@@ -66,7 +66,7 @@ export abstract class BoardObject extends Container implements PoolClient {
     private readonly _hasEye: boolean;
     private readonly _isBomb: boolean;
     private readonly _hasCrystal: boolean;
-    public readonly isFrozen: boolean;
+    public readonly isFreeze: boolean;
     public readonly isLock: boolean;
     public readonly entityID: int;
     public readonly isKey: boolean;
@@ -87,7 +87,7 @@ export abstract class BoardObject extends Container implements PoolClient {
         this._hasEye = params?.hasEye ?? false;
         this._hasCrystal = params?.hasCrystal ?? false;
         this._isBomb = params?.isBomb ?? false;
-        this.isFrozen = params?.isFrozen ?? false;
+        this.isFreeze = params?.isFreeze ?? false;
         this.isLock = params?.isLock ?? false;
         this.isKey = params?.isKey ?? false;
         this.isSoil = params?.isSoil ?? false;

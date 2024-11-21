@@ -1,6 +1,7 @@
 import { BarrelBomb } from "../display/BarrelBomb";
 import { centerObjectAt } from "../display/Board";
 import { BoardObject } from "../display/BoardObject";
+import { Freeze } from "../display/Freeze";
 import { Gem } from "../display/Gem";
 import { Lock } from "../display/Lock";
 import { Sand } from "../display/Sand";
@@ -92,7 +93,7 @@ export class InitializeBoard extends GameplayInternal {
         //                 boardObject = M3Pool.getSquareBomb(bombEntityID);
                 }
                 else if (tileData.gem !== EntityID.ENTITY_NONE) {
-        //             boardObject = M3Pool.getGem(tileData.gem);
+                    boardObject = getObject(Gem, tileData.gem);
                 }
                 else if (!tileData.empty) {
                     boardObject = getObject(Gem, this.ctx.model.spawn())
@@ -106,10 +107,10 @@ export class InitializeBoard extends GameplayInternal {
                 }
 
                 if (tileData.freeze !== EntityID.ENTITY_NONE) {
-        //             let freeze: IBoardObject = M3Pool.getFreeze(tileData.freeze);
-        //             this.ctx.model.registerFreezeAt(freeze, i, j);
-        //             centerObjectAt(freeze, i, j);
-        //             this.ctx.view.freezesContainer.addChild(freeze as DisplayObject);
+                    const freeze = getObject(Freeze, tileData.freeze);
+                    this.ctx.model.registerFreezeAt(freeze, i, j);
+                    centerObjectAt(freeze, i, j);
+                    this.ctx.view.freezesContainer.addChild(freeze);
                 }
 
                 if (tileData.lock !== EntityID.ENTITY_NONE) {
