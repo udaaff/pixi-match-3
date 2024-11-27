@@ -6,7 +6,7 @@ export class Rock extends Sprite {
     constructor() {
         super();
 
-        this.texture = textureFrom(`rock_${getRandomUint(4) + 1}`);
+        this.texture = textureFrom(`board/blocks/rock_${getRandomUint(4) + 1}`);
         this.setSize(cfg.boardCellWidth, cfg.boardCellHeight);
     }
 }

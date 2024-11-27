@@ -8,6 +8,7 @@ import { BarrelBomb } from "../display/BarrelBomb";
 import { Lock } from "../display/Lock";
 import { Stone } from "../display/Stone";
 import { Freeze } from "../display/Freeze";
+import { ColorBomb } from "../display/ColorBomb";
 
 export function registerPools() {
     registerPool(new EntityPool(new Creator(Stone)), Stone);
@@ -17,5 +18,6 @@ export function registerPools() {
     registerPool(new EntityPool(new Creator(Lock)), Lock);
     registerPool(new EntityPool(new Creator(BarrelBomb)), BarrelBomb);
     registerPool(new EntityPool(new Creator(Gem)), Gem);
+    registerPool(new EntityPool(new Creator(ColorBomb)), ColorBomb);
     registerPool(new EntityPool(new SpriteCreator(Sprite)), Sprite);
 }

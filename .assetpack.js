@@ -9,6 +9,7 @@ export default {
             // compression: { jpg: false, png: false, webp: false },
             texturePacker: {
                 texturePacker: {
+                    nameStyle: "relative",
                     removeFileExtension: true,
                 },
             },

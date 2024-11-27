@@ -1,6 +1,7 @@
 import { BarrelBomb } from "../display/BarrelBomb";
 import { centerObjectAt } from "../display/Board";
 import { BoardObject } from "../display/BoardObject";
+import { ColorBomb } from "../display/ColorBomb";
 import { Freeze } from "../display/Freeze";
 import { Gem } from "../display/Gem";
 import { Lock } from "../display/Lock";
@@ -9,11 +10,12 @@ import { Soil } from "../display/Soil";
 import { Stone } from "../display/Stone";
 import { cfg } from "../game/cfg";
 import { BoardCoordinates } from "../model/BoardCoordinates";
-import { getBombTypeByEntityID } from "../model/BombType";
+import { BombType, getBombTypeByEntityID } from "../model/BombType";
 import { EntityID } from "../model/EntityID";
+import { get3x3BombIdByMatchType, getHBombIdByMatchType, getVBombIdByMatchType } from "../model/matchColor";
 import { Viewport } from "../model/Viewport";
 import { getObject } from "../pool/pool";
-import { shuffle } from "../utils/arrayUtils";
+import { getRandomElement, shuffle } from "../utils/arrayUtils";
 import { int } from "../utils/integer";
 import { GameplayInternal } from "./GameplayInternal";
 
@@ -63,28 +65,27 @@ export class InitializeBoard extends GameplayInternal {
                         boardObject = getObject(Stone, tileData.block);
                 }
                 else if (tileData.bomb !== EntityID.ENTITY_NONE) {
-                    const bombType: int = getBombTypeByEntityID(tileData.bomb);
                     let bombEntityID: int;
-                    let matchType: int;
+                    const bombType: int = getBombTypeByEntityID(tileData.bomb);
+                    const matchType = getRandomElement(this.ctx.model.spawnableMatchTypes);
+                    if (matchType === null)
+                        throw new Error("there are no spawnableMatchTypes");
 
                     if (tileData.bomb == EntityID.BOMB_3x3_ANY) {
-        //                 matchType = VectorUtils.getSeededRandomElement(this.ctx.model.spawnableMatchTypes);
-        //                 bombEntityID = MatchType.matchTypeTo3x3BombID(matchType);
+                        bombEntityID = get3x3BombIdByMatchType(matchType);
                     }
                     else if (tileData.bomb == EntityID.BOMB_V_LINE_ANY) {
-        //                 matchType = VectorUtils.getSeededRandomElement(this.ctx.model.spawnableMatchTypes);
-        //                 bombEntityID = MatchType.matchTypeToVBombID(matchType);
+                        bombEntityID = getVBombIdByMatchType(matchType);
                     }
                     else if (tileData.bomb == EntityID.BOMB_H_LINE_ANY) {
-        //                 matchType = VectorUtils.getSeededRandomElement(this.ctx.model.spawnableMatchTypes);
-        //                 bombEntityID = MatchType.matchTypeToHBombID(matchType);
+                        bombEntityID = getHBombIdByMatchType(matchType);
                     }
                     else {
-        //                 bombEntityID = tileData.bomb;
+                        bombEntityID = tileData.bomb;
                     }
 
-        //             if (bombType == BombType.COLOR)
-        //                 boardObject = M3Pool.getColorBomb(bombEntityID);
+                    if (bombType == BombType.COLOR)
+                        boardObject = getObject(ColorBomb, bombEntityID);
         //             else if (bombType == BombType.HORIZONTAL)
         //                 boardObject = M3Pool.getHBomb(bombEntityID);
         //             else if (bombType == BombType.VERTICAL)

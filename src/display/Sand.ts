@@ -45,7 +45,7 @@ export class Sand extends BoardObject {
         if (!this._lifeToIDMap || !this._lifeToIDMap[this._numLives])
             throw new Error(`There is no map for id ${this.entityID}`);
 
-        this._imageTN = `sand_000${this._lifeToIDMap[this._numLives]}`;
+        this._imageTN = `board/sand/sand_000${this._lifeToIDMap[this._numLives]}`;
         this._image = getObject(Sprite, this._imageTN);
         this._image.setSize(
             cfg.boardCellWidth, cfg.boardCellHeight
