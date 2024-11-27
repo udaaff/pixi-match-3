@@ -13,10 +13,10 @@ export class Freeze extends BoardObject {
             isFreeze: true
         });
 
-        this._mc = Sprite.from("ice");
+        this._mc = Sprite.from("board/states/ice");
         this._mc.setSize(cfg.boardCellWidth, cfg.boardCellHeight);
 
-        this._container = new Sprite();
+        this._container = new Container();
         this._container.y = -cfg.boardCellWidth / 2;
         this._container.x = -cfg.boardCellHeight / 2;
 

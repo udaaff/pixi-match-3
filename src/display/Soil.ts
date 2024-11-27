@@ -21,7 +21,7 @@ export class Soil extends BoardObject implements HasCrystal {
             hasCrystal: true,
         });
 
-        const textureName = `soil_000${(MIN_SOIL_ID + getRandomUint(MAX_SOIL_ID))}`;
+        const textureName = `board/blocks/soil_000${(MIN_SOIL_ID + getRandomUint(MAX_SOIL_ID))}`;
 
         this._mc = Sprite.from(textureName);
         this._mc.setSize(cfg.boardCellWidth, cfg.boardCellHeight);

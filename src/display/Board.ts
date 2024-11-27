@@ -75,5 +75,8 @@ export class Board extends Container {
         this.addChild(this.gemsContainer);
         this.addChild(this.locksContainer);
         this.addChild(this.freezesContainer);
+
+        // this.gemsContainer.eventMode = "static";
+        // this.gemsContainer.on("pointerdown", (e) => console.log(e))
     }
 }

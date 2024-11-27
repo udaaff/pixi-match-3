@@ -25,4 +25,7 @@ export const cfg = {
     maxShuffleAttemps: 1000,
 
     hintDuration: 0.3,
+
+    bombFloatingPeriod: 1,
+    bombFloatingAmplitude: 2,
 };

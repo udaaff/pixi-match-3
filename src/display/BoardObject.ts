@@ -43,6 +43,7 @@ export interface BoardObjectParams {
     isMoveable?: boolean;
     isMatchable?: boolean;
     isHBomb?: boolean;
+    isVBomb?: boolean,
     isBomb?: boolean;
     isGem?: boolean;
     isSleepable?: boolean;
@@ -54,6 +55,7 @@ export interface BoardObjectParams {
     isSoil?: boolean;
     isSquareBomb5x5?: boolean;
     isSquareBomb3x3?: boolean;
+    isColorBomb?: boolean;
     hasEye?: boolean;
     hasCrystal?: boolean;
     entityID: int;
@@ -75,6 +77,8 @@ export abstract class BoardObject extends Container implements PoolClient {
     public readonly isCollectable: boolean;
     public readonly isSquareBomb5x5: boolean;
     public readonly isSquareBomb3x3: boolean;
+    public readonly isColorBomb: boolean;
+    public readonly isHBomb: boolean;
     public coordinates: BoardCoordinates | null = null;
     protected _numLives = 1;
     protected _isBlocked = false;
@@ -95,6 +99,9 @@ export abstract class BoardObject extends Container implements PoolClient {
         this.isCollectable = params?.isCollectable ?? false;
         this.isSquareBomb3x3 = params?.isSquareBomb3x3 ?? false;
         this.isSquareBomb5x5 = params?.isSquareBomb5x5 ?? false;
+        this.isColorBomb = params?.isColorBomb ?? false;
+        this.isHBomb = params?.isHBomb ?? false;
+
         this.entityID = params?.entityID ?? EntityID.ENTITY_NONE;
     }
 

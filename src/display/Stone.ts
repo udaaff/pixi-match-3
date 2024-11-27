@@ -27,7 +27,7 @@ export class Stone extends BoardObject {
             isSoil: true
         });
 
-        this._container = new Sprite();
+        this._container = new Container();
         this._container.y = -cfg.boardCellHeight / 2;
         this._container.x = -cfg.boardCellWidth / 2;
         this.addChild(this._container);
@@ -60,7 +60,7 @@ export class Stone extends BoardObject {
             this._container.removeChild(this._image);
         }
 
-        this._imageTN = `stone_${this._lifeToIDMap![this._numLives]}`;
+        this._imageTN = `board/blocks/stone_${this._lifeToIDMap![this._numLives]}`;
         this._image = getObject(Sprite, this._imageTN);
         this._image.setSize(cfg.boardCellWidth, cfg.boardCellHeight);
         this._container.addChild(this._image);

@@ -10,20 +10,20 @@ import gsap from "gsap";
 import { TweenProcess } from "../process/TweenProcess";
 
 const _GRAPHICS: { [key: number]: string } = {
-    [EntityID.GEM_BLUE]: "g21",
-    [EntityID.GEM_GREEN]: "g22",
-    [EntityID.GEM_ORANGE]: "g23",
-    [EntityID.GEM_PURPLE]: "g24",
-    [EntityID.GEM_RED]: "g25",
-    [EntityID.GEM_YELLOW]: "g26",
+    [EntityID.GEM_BLUE]: "board/gems/g21",
+    [EntityID.GEM_GREEN]: "board/gems/g22",
+    [EntityID.GEM_ORANGE]: "board/gems/g23",
+    [EntityID.GEM_PURPLE]: "board/gems/g24",
+    [EntityID.GEM_RED]: "board/gems/g25",
+    [EntityID.GEM_YELLOW]: "board/gems/g26",
 }
 
 export class Gem extends BoardObject {
     private _container: Container;
-    private _image:Sprite;
-    private _imageTN:string;
+    private _image: Sprite;
+    private _imageTN: string;
     // private _highlight:Sprite;
-    private _matchType:int;
+    private _matchType: int;
     // private _impulsController:ImpulsController;
     // private _impulsContainer:Sprite;
     // private _eye:Eye;
@@ -69,8 +69,7 @@ export class Gem extends BoardObject {
         // this._eyeContainer.addChild(this._eye);
     }
 
-    public override get highlight(): Sprite | null
-    {
+    public override get highlight(): Sprite | null {
         // if (!this._highlight)
         // {
         //     this._highlight = new Image(Context.textureManager.getTexture(this._imageTN + "_screen"));
@@ -92,18 +91,15 @@ export class Gem extends BoardObject {
     //     // this.highlight.alpha = value;
     // }
 
-    public get matchType():int
-    {
+    public get matchType(): int {
         return this._matchType;
     }
 
-    public addImpuls():void
-    {
+    public addImpuls(): void {
         // this._impulsController.addImpuls();
     }
 
-    public override onGetFromPool():void
-    {
+    public override onGetFromPool(): void {
         this.scale.set(1);
         this.alpha = 1;
         this.rotation = 0;
@@ -118,8 +114,7 @@ export class Gem extends BoardObject {
         // this._eye.x = this._eye.y = 0;
     }
 
-    public override onDisposeToPool():void
-    {
+    public override onDisposeToPool(): void {
         // this._impulsController.stop();
         // this._eye.toPoolHandler();
     }

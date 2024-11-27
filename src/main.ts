@@ -20,6 +20,8 @@ import { LoadScreen } from './screens/LoadScreen';
 // The PixiJS app Application instance, shared across the project
 export const app = new Application();
 
+globalThis.__PIXI_APP__ = app;
+
 export const gameTicker = new Ticker();
 gameTicker.autoStart = true;
 

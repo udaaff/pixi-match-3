@@ -90,14 +90,14 @@ export function getMatchTypeByEntityID(entityID: int): int {
     return entityIDToMatchType.get(entityID) ?? ColorType.UNDEFINED;
 }
 
-export function getMatchTypeBy3x3BombID(matchType: int): int {
+export function get3x3BombIdByMatchType(matchType: int): int {
     return _matchTypeTo3x3BombID.get(matchType) ?? ColorType.UNDEFINED;
 }
 
-export function getMatchTypeByHBombID(matchType: int): int {
+export function getHBombIdByMatchType(matchType: int): int {
     return _matchTypeToHBombID.get(matchType) ?? ColorType.UNDEFINED;
 }
 
-export function getMatchTypeByVBombID(matchType: int): int {
+export function getVBombIdByMatchType(matchType: int): int {
     return _matchTypeToVBombID.get(matchType) ?? ColorType.UNDEFINED;
 }
