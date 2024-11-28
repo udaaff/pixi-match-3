@@ -28,4 +28,7 @@ export const cfg = {
 
     bombFloatingPeriod: 1,
     bombFloatingAmplitude: 2,
+
+    boardX0: 20,
+    boardY0: 80,
 };

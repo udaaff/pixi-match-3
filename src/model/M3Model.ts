@@ -169,6 +169,10 @@ export class M3Model {
             || c1.column === c2.column && Math.abs(c1.row - c2.row) === 1;
     }
 
+    public get wayPoints(): BoardCoordinates[] {
+        return this._wayPoints;
+    }
+
     public setWayPoints(wayPoints: BoardCoordinates[]): void {
         this._wayPoints = wayPoints;
         if (!this._wayPoints || this._wayPoints.length === 0)

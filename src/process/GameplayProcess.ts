@@ -8,6 +8,7 @@ import { int } from "../utils/integer";
 import { Context } from "./Context";
 import { CreateRocks } from "./CreateRocks";
 import { CreateTiles } from "./CreateTiles";
+import { InitBoardPosition } from "./InitBoardPosition";
 import { InitializeBoard } from "./InitializeBoard";
 import { Process } from "./Process";
 import { addProcess } from "./processRunner";
@@ -34,5 +35,6 @@ export class GameplayProcess extends Process {
         addProcess(new CreateTiles(), "gameplay");
         addProcess(new CreateRocks(), "gameplay");
         addProcess(new InitializeBoard(), "gameplay");
+        addProcess(new InitBoardPosition(), "gameplay");
     }
 }

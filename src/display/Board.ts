@@ -39,7 +39,7 @@ export function getStageCenter(): Point {
 }
 
 /** Distance from one cell to another. */
-export function getDistance(coordinates1: BoardCoordinates, coordinates2: BoardCoordinates): Number {
+export function getDistance(coordinates1: BoardCoordinates, coordinates2: BoardCoordinates): number {
     var dx: int = (coordinates2.column - coordinates1.column) * cfg.boardCellWidth;
     var dy: int = (coordinates2.row - coordinates1.row) * cfg.boardCellHeight;
     return Math.sqrt(dx * dx + dy * dy);
@@ -57,6 +57,8 @@ export function getDistance(coordinates1: BoardCoordinates, coordinates2: BoardC
  * 6. Animations.
  */
 export class Board extends Container {
+    public readonly movingContainer = new Container();
+    public readonly shakingContainer = new Container();
     public readonly tilesContainer = new Container();
     public readonly rockTilesContainer = new Container();
     public readonly soilContainer = new Container();
@@ -68,15 +70,41 @@ export class Board extends Container {
     constructor() {
         super();
         // this.scale.set(0.5)
-        this.addChild(this.tilesContainer);
-        this.addChild(this.rockTilesContainer);
-        this.addChild(this.bgItemsContainer);
-        this.addChild(this.soilContainer);
-        this.addChild(this.gemsContainer);
-        this.addChild(this.locksContainer);
-        this.addChild(this.freezesContainer);
+        this.addChild(this.movingContainer);
+        this.movingContainer.addChild(this.shakingContainer);
+        this.shakingContainer.addChild(
+            this.tilesContainer,
+            this.rockTilesContainer,
+            this.bgItemsContainer,
+            this.soilContainer,
+            this.gemsContainer,
+            this.locksContainer,
+            this.freezesContainer,
+        );
 
         // this.gemsContainer.eventMode = "static";
         // this.gemsContainer.on("pointerdown", (e) => console.log(e))
+    }
+
+    public get movingContainerX(): number {
+        return this.movingContainer.x;
+    }
+
+    public set movingContainerX(value: number) {
+        value = Math.round(value);
+        this.movingContainer.x = value;
+        // this._movingAnimationContainer.x = value;
+        // this._background.scrollX = -value * .4;
+    }
+
+    public get movingContainerY(): number {
+        return this.movingContainer.y;
+    }
+
+    public set movingContainerY(value: number) {
+        value = Math.round(value);
+        this.movingContainer.y = value;
+        // this._movingAnimationContainer.y = value;
+        // this._background.scrollY = 200 - value * .4;
     }
 }
