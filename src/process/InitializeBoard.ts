@@ -8,6 +8,7 @@ import { HBomb } from "../display/HBomb";
 import { Lock } from "../display/Lock";
 import { Sand } from "../display/Sand";
 import { Soil } from "../display/Soil";
+import { SquareBomb } from "../display/SquareBomb";
 import { Stone } from "../display/Stone";
 import { VBomb } from "../display/VBomb";
 import { cfg } from "../game/cfg";
@@ -92,8 +93,8 @@ export class InitializeBoard extends GameplayInternal {
                         boardObject = getObject(HBomb, bombEntityID);
                     else if (bombType == BombType.VERTICAL)
                         boardObject = getObject(VBomb, bombEntityID);
-        //             else if (bombType == BombType.SQUARE_3x3)
-        //                 boardObject = M3Pool.getSquareBomb(bombEntityID);
+                    else if (bombType == BombType.SQUARE_3x3)
+                        boardObject = getObject(SquareBomb, bombEntityID);
                 }
                 else if (tileData.gem !== EntityID.ENTITY_NONE) {
                     boardObject = getObject(Gem, tileData.gem);
