@@ -8,9 +8,11 @@ import { int } from "../utils/integer";
 import { Context } from "./Context";
 import { CreateRocks } from "./CreateRocks";
 import { CreateTiles } from "./CreateTiles";
+import { FadeOutBoard } from "./FadeOutBoard";
 import { InitBoardPosition } from "./InitBoardPosition";
 import { InitializeBoard } from "./InitializeBoard";
-import { Process } from "./Process";
+import { LogProcessInfo } from "./LogProcessInfo";
+import { logProcessInfo, Process } from "./Process";
 import { addProcess } from "./processRunner";
 
 export class GameplayProcess extends Process {
@@ -36,5 +38,7 @@ export class GameplayProcess extends Process {
         addProcess(new CreateRocks(), "gameplay");
         addProcess(new InitializeBoard(), "gameplay");
         addProcess(new InitBoardPosition(), "gameplay");
+        addProcess(new FadeOutBoard(), "gameplay");
+        addProcess(new LogProcessInfo(), "gameplay");
     }
 }
