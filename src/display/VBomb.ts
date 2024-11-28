@@ -42,7 +42,7 @@ export class VBomb extends Bomb implements Matchable, Sleepable, HasEye {
                 duration: cfg.bombFloatingPeriod,
                 y: this._container.y + cfg.bombFloatingAmplitude,
                 ease: "sine.inOut",
-                repeat: 0,
+                repeat: -1,
                 yoyo: true,
             })
         ]);

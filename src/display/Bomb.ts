@@ -77,7 +77,7 @@ export abstract class Bomb extends BoardObject implements IBomb, Matchable {
             this._blickProcess = new ParallelProcess([
                 new TweenProcess(this._container, {
                     duration: cfg.hintDuration,
-                    repeat: 0,
+                    repeat: -1,
                     yoyo: true,
                     pixi: {
                         scale: 1.1,
@@ -87,7 +87,7 @@ export abstract class Bomb extends BoardObject implements IBomb, Matchable {
                     duration: cfg.hintDuration,
                     alpha: 1,
                     yoyo: true,
-                    repeat: 0,
+                    repeat: -1,
                 })
             ])
         }

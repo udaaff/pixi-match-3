@@ -40,7 +40,7 @@ export class SquareBomb extends Bomb implements Moveable, Matchable {
                 scaleY: 1.05,
             },
             ease: "sine.inOut",
-            repeat: 0,
+            repeat: -1,
             yoyo: true,
         });
 

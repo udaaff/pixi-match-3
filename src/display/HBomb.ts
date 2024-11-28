@@ -43,7 +43,7 @@ export class HBomb extends Bomb implements Matchable, Sleepable, HasEye {
                 duration: cfg.bombFloatingPeriod,
                 x: this._container.x + cfg.bombFloatingAmplitude,
                 ease: "sine.inOut",
-                repeat: 0,
+                repeat: -1,
                 yoyo: true,
             })
         ]);

@@ -38,7 +38,7 @@ export class ColorBomb extends Bomb implements Sleepable, HasEye, Moveable {
         this._scaleAction = new TweenProcess(this._container, {
             duration: 2,
             ease: "bounce.in",
-            repeat: 0,
+            repeat: -1,
             yoyo: true,
             pixi: {
                 scale: 1.08
