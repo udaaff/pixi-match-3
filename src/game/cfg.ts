@@ -31,4 +31,7 @@ export const cfg = {
 
     boardX0: 20,
     boardY0: 80,
+
+    boardMoveSpeedFactor: 0.005,
+    boardMoveDelay: 1,
 };

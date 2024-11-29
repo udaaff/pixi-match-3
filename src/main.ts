@@ -16,6 +16,7 @@ import PixiPlugin from 'gsap/PixiPlugin';
 import gsap from 'gsap';
 import * as PIXI from 'pixi.js';
 import { LoadScreen } from './screens/LoadScreen';
+import { MotionPathPlugin } from 'gsap/all';
 
 // The PixiJS app Application instance, shared across the project
 export const app = new Application();
@@ -27,6 +28,8 @@ gameTicker.autoStart = true;
 
 gsap.registerPlugin(PixiPlugin);
 PixiPlugin.registerPIXI(PIXI);
+
+gsap.registerPlugin(MotionPathPlugin);
 
 // Set up a resize function for the app
 function resize() {
@@ -101,7 +104,7 @@ async function init() {
 
     setRawLevelsData(levels);
 
-    const gameplay = new GameplayProcess(0)
+    const gameplay = new GameplayProcess(1)
     addProcess(gameplay, 'app');
 
     tracePools();

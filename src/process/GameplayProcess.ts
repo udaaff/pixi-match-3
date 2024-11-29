@@ -14,6 +14,7 @@ import { InitializeBoard } from "./InitializeBoard";
 import { LogProcessInfo } from "./LogProcessInfo";
 import { logProcessInfo, Process } from "./Process";
 import { addProcess } from "./processRunner";
+import { ScrollBoard } from "./ScrollBoard";
 
 export class GameplayProcess extends Process {
     private static _ctx: Context;
@@ -39,6 +40,7 @@ export class GameplayProcess extends Process {
         addProcess(new InitializeBoard(), "gameplay");
         addProcess(new InitBoardPosition(), "gameplay");
         addProcess(new FadeOutBoard(), "gameplay");
+        addProcess(new ScrollBoard, "gameplay");
         addProcess(new LogProcessInfo(), "gameplay");
     }
 }
