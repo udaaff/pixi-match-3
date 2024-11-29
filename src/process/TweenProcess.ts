@@ -4,6 +4,7 @@ import { Process } from "./Process";
 
 // target -> [ tween, tween, ... , tween ]
 const targetToActiveTweenMap = new Map<any, TweenProcess[]>();
+window.test2 = targetToActiveTweenMap;
 
 export function stopTweensOf(target: any): void {
     const tweens = targetToActiveTweenMap.get(target);

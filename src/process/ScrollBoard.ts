@@ -37,19 +37,18 @@ export class ScrollBoard extends GameplayInternal {
             duration,
             ease: "sine.inOut",
             delay: cfg.boardMoveDelay,
-            onUpdate: () => this.tween_onUpdateCallback(),
-            onComplete: () => this.complete(),
+            onUpdate: () => this.onTweenUpdate(),
             motionPath: bezierPoints,
         });
+        this._tween.onComplete.connect(_p => this.complete());
         this._tween.start();
     }
 
     protected override onStop(): void {
         this._tween?.stop();
-
     }
 
-    private tween_onUpdateCallback(): void {
+    private onTweenUpdate(): void {
         this.ctx.view.movingContainerX = this._point.x;
         this.ctx.view.movingContainerY = this._point.y;
     }

@@ -4,6 +4,7 @@ import { getGameSession, getSelectedLevel, setGameSession, setSelectedLevel } fr
 import { GameSessionData } from "../model/GameSessionData";
 import { getLevelData } from "../model/levels";
 import { M3Model } from "../model/M3Model";
+import { Swap } from "../model/Swap";
 import { int } from "../utils/integer";
 import { Context } from "./Context";
 import { CreateRocks } from "./CreateRocks";
@@ -11,6 +12,7 @@ import { CreateTiles } from "./CreateTiles";
 import { FadeOutBoard } from "./FadeOutBoard";
 import { InitBoardPosition } from "./InitBoardPosition";
 import { InitializeBoard } from "./InitializeBoard";
+import { Invoke } from "./Invoke";
 import { LogProcessInfo } from "./LogProcessInfo";
 import { logProcessInfo, Process } from "./Process";
 import { addProcess } from "./processRunner";
@@ -20,6 +22,7 @@ export class GameplayProcess extends Process {
     private static _ctx: Context;
     private _model!: M3Model;
     private _view!: Board;
+    private _possibleSwap: Swap | null = null;
 
     constructor(private readonly _levelID: int) {
         super();
@@ -41,6 +44,13 @@ export class GameplayProcess extends Process {
         addProcess(new InitBoardPosition(), "gameplay");
         addProcess(new FadeOutBoard(), "gameplay");
         addProcess(new ScrollBoard, "gameplay");
+        addProcess(new Invoke(this.setupInteraction, this), "gameplay");
         addProcess(new LogProcessInfo(), "gameplay");
+    }
+
+    private setupInteraction(): void {
+        this._model.sleepOutside();
+        this._possibleSwap = this._model.matcher.getRandomPossibleSwap();
+
     }
 }

@@ -14,6 +14,8 @@ export function logProcessInfo() {
     console.log(" ### End ###");
 }
 
+window.test = logProcessInfo;
+
 export abstract class Process {
     private readonly _delay: number;
     private _elapsed = 0;
