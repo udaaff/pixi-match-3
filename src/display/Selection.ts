@@ -10,6 +10,7 @@ export class Selection extends Container {
 
         this._selection = Sprite.from("board/selection");
         this._selection.pivot.set(0.5);
+        this._selection.anchor.set(0.5);
         this._selection.setSize(cfg.boardCellWidth, cfg.boardCellHeight);
         this._selection.alpha = 0;
         super.addChild(this._selection);

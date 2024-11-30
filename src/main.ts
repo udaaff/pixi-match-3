@@ -72,7 +72,7 @@ async function init() {
     // Initialize app
     await app.init({
         resolution: Math.max(window.devicePixelRatio, 2),
-        backgroundColor: 0xffffff,
+        backgroundColor: 0x000000,
     });
     app.ticker.maxFPS = 60;
 
@@ -96,7 +96,7 @@ async function init() {
 
     logProcessInfo();
     // Show initial loading screen
-    await navigation.showScreen(LoadScreen);
+    // await navigation.showScreen(LoadScreen);
 
     registerPools();
 
@@ -105,7 +105,7 @@ async function init() {
 
     setRawLevelsData(levels);
 
-    const gameplay = new GameplayProcess(1)
+    const gameplay = new GameplayProcess(2)
     addProcess(gameplay, 'app');
 
     tracePools();

@@ -71,6 +71,14 @@ export class Board extends Container {
     constructor() {
         super();
         // this.scale.set(0.5)
+        this.tilesContainer.interactiveChildren = false;
+        this.rockTilesContainer.interactiveChildren = false;
+        this.soilContainer.interactiveChildren = false;
+        this.bgItemsContainer.interactiveChildren = false;
+        this.locksContainer.interactiveChildren = false;
+        this.freezesContainer.interactiveChildren = false;
+        this.selectionContainer.interactiveChildren = false;
+
         this.addChild(this.movingContainer);
         this.movingContainer.addChild(this.shakingContainer);
         this.shakingContainer.addChild(
