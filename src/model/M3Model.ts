@@ -27,6 +27,7 @@ export function coordinatesInRange(row:int, column:int, field: any[][]): boolean
 }
 
 export class M3Model {
+    public interactionEnabled: boolean = false;
     public readonly matcher: Matcher;
     public readonly boardVLength: int;
     public readonly boardHLength: int;

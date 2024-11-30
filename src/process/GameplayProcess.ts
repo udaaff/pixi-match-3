@@ -1,4 +1,6 @@
+import { FederatedEvent, FederatedPointerEvent } from "pixi.js";
 import { Board } from "../display/Board";
+import { Selection } from "../display/Selection";
 import { app } from "../main";
 import { getGameSession, getSelectedLevel, setGameSession, setSelectedLevel } from "../model/app";
 import { GameSessionData } from "../model/GameSessionData";
@@ -18,12 +20,14 @@ import { LogProcessInfo } from "./LogProcessInfo";
 import { logProcessInfo, Process } from "./Process";
 import { addProcess } from "./processRunner";
 import { ScrollBoard } from "./ScrollBoard";
+import { UnblockInteraction } from "./UnblockInteraction";
 
 export class GameplayProcess extends Process {
     private static _ctx: Context;
     private _model!: M3Model;
     private _view!: Board;
     private _possibleSwap: Swap | null = null;
+    private _selection!: Selection;
 
     constructor(private readonly _levelID: int) {
         super();
@@ -46,6 +50,7 @@ export class GameplayProcess extends Process {
         addProcess(new FadeOutBoard(), "gameplay");
         addProcess(new ScrollBoard, "gameplay");
         addProcess(new Invoke(this.setupInteraction, this), "gameplay");
+        addProcess(new UnblockInteraction(), "gameplay");
         addProcess(new LogProcessInfo(), "gameplay");
     }
 
@@ -56,5 +61,17 @@ export class GameplayProcess extends Process {
             throw new Error("no possible swap found");
 
         addProcess(new IdleController(this._possibleSwap), "idle", false);
+
+        this._selection = new Selection();
+        this._view.selectionContainer.addChild(this._selection);
+
+        this._view.gemsContainer.on("pointerdown", this.gem_touchBeganHandler, this);
+    }
+
+    private gem_touchBeganHandler(event: FederatedPointerEvent): void {
+        if (!this._model.interactionEnabled)
+            return;
+
+        console.log(event)
     }
 }

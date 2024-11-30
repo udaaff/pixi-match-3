@@ -66,6 +66,7 @@ export class Board extends Container {
     public readonly bgItemsContainer = new Container();
     public readonly locksContainer = new Container();
     public readonly freezesContainer = new Container();
+    public readonly selectionContainer = new Container();
 
     constructor() {
         super();
@@ -77,12 +78,13 @@ export class Board extends Container {
             this.rockTilesContainer,
             this.bgItemsContainer,
             this.soilContainer,
+            this.selectionContainer,
             this.gemsContainer,
             this.locksContainer,
             this.freezesContainer,
         );
 
-        // this.gemsContainer.eventMode = "static";
+        this.gemsContainer.eventMode = "static";
         // this.gemsContainer.on("pointerdown", (e) => console.log(e))
     }
 
