@@ -25,7 +25,7 @@ export abstract class Process {
     private _timestamp = 0;
     private _name = "";
 
-    constructor(delay: number = 0) {
+    constructor(delay = 0) {
         this._delay = delay;
         this._onComplete = new Signal();
 
