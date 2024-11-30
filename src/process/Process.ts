@@ -41,9 +41,9 @@ export abstract class Process {
         return this._isRunning;
     }
 
-    public start(): void {
+    public start() {
         if (this._isRunning)
-            return;
+            return this;
 
         this._isRunning = true;
 
@@ -62,15 +62,16 @@ export abstract class Process {
             }
             this.onStart();
         }
+        return this;
     }
 
     protected onStart(): void {
 
     }
 
-    public stop(emitComplete: boolean = false): void {
+    public stop(emitComplete: boolean = false) {
         if (!this._isRunning)
-            return;
+            return this;
 
         this._isRunning = false;
 
@@ -87,16 +88,19 @@ export abstract class Process {
 
         if (emitComplete)
             this._onComplete.emit(this);
+
+        return this;
     }
 
     protected onStop(): void {
 
     }
 
-    public reset(): void {
+    public reset() {
         this.stop();
         this._elapsed = 0;
         this.onReset();
+        return this;
     }
 
     protected onReset(): void {

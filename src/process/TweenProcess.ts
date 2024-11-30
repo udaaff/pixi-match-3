@@ -45,18 +45,20 @@ export class TweenProcess extends Process {
             targetToActiveTweenMap.set(this._target, tweens);
         }
 
-        const length = tweens.length;
-        if (length > 0) {
-            outerLoop:
-            for (let i = length - 1; i > -1; i--) {
-                const tween = tweens[i];
-                for (let prop in this.props) {
-                    if (!(this._target instanceof Object))
-                        continue;
-                    if (this._target.hasOwnProperty(prop) && tween.props.hasOwnProperty(prop)) {
-                        tween.stop(true); // delete itself
-                        continue outerLoop;
+        outerLoop:
+        for (const tween of tweens) {
+            for (let propName in this.props) {
+                if (tween.props.hasOwnProperty(propName)) {
+                    if (propName === "pixi") {
+                        for (let pixiPropName in this.props.pixi) {
+                            if ((tween.props.pixi as Object).hasOwnProperty(pixiPropName)) {
+                                tween.stop(true);
+                                continue outerLoop;
+                            }
+                        }
                     }
+                    tween.stop(true);
+                    continue outerLoop;
                 }
             }
         }

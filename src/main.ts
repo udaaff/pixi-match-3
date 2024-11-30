@@ -17,6 +17,7 @@ import gsap from 'gsap';
 import * as PIXI from 'pixi.js';
 import { LoadScreen } from './screens/LoadScreen';
 import { MotionPathPlugin } from 'gsap/all';
+import { RepeatCall } from './process/RepeatCall';
 
 // The PixiJS app Application instance, shared across the project
 export const app = new Application();
@@ -108,6 +109,7 @@ async function init() {
     addProcess(gameplay, 'app');
 
     tracePools();
+
 }
 
 // Init everything

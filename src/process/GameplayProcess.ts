@@ -10,6 +10,7 @@ import { Context } from "./Context";
 import { CreateRocks } from "./CreateRocks";
 import { CreateTiles } from "./CreateTiles";
 import { FadeOutBoard } from "./FadeOutBoard";
+import { IdleController } from "./IdleController";
 import { InitBoardPosition } from "./InitBoardPosition";
 import { InitializeBoard } from "./InitializeBoard";
 import { Invoke } from "./Invoke";
@@ -51,6 +52,9 @@ export class GameplayProcess extends Process {
     private setupInteraction(): void {
         this._model.sleepOutside();
         this._possibleSwap = this._model.matcher.getRandomPossibleSwap();
+        if (!this._possibleSwap)
+            throw new Error("no possible swap found");
 
+        addProcess(new IdleController(this._possibleSwap), "idle", false);
     }
 }
