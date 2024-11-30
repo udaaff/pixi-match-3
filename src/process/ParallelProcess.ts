@@ -35,3 +35,7 @@ export class ParallelProcess extends Process {
             this.complete();
     }
 }
+
+export function parallel(...processes: Process[]): ParallelProcess {
+    return new ParallelProcess(processes);
+}

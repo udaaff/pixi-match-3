@@ -98,3 +98,8 @@ export class TweenProcess extends Process {
         this.complete();
     }
 }
+
+export function tween(target: any, duration: number, props: gsap.TweenVars): TweenProcess {
+    props.duration = duration;
+    return new TweenProcess(target, props);
+}

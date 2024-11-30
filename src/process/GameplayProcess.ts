@@ -99,8 +99,6 @@ export class GameplayProcess extends Process {
         if (!pressed)
             return;
 
-        console.log(pressed)
-
         // Если нету выделенного объекта
         if (!this._selected) {
             this._selected = pressed;

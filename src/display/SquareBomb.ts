@@ -35,10 +35,7 @@ export class SquareBomb extends Bomb implements Moveable, Matchable {
 
         this._scaleAction = new TweenProcess(this._container, {
             duration: cfg.bombFloatingPeriod,
-            pixi: {
-                scaleX: 1.05,
-                scaleY: 1.05,
-            },
+            pixi: { scale: 1.05 },
             ease: "sine.inOut",
             repeat: -1,
             yoyo: true,

@@ -34,3 +34,7 @@ export class SerialProcess extends Process {
         this.process();
     }
 }
+
+export function serial(...processes: Process[]): SerialProcess {
+    return new SerialProcess(processes);
+}

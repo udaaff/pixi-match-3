@@ -2,11 +2,11 @@ import { Point } from "pixi.js";
 import { BoardObject } from "../display/BoardObject";
 import { Swap } from "../model/Swap";
 import { GameplayInternal } from "./GameplayInternal";
-import { ParallelProcess } from "./ParallelProcess";
+import { parallel, ParallelProcess } from "./ParallelProcess";
 import { getCenterAtCoordinates } from "../display/Board";
 import { RepeatCall } from "./RepeatCall";
 import { addProcess } from "./processRunner";
-import { TweenProcess } from "./TweenProcess";
+import { tween, TweenProcess } from "./TweenProcess";
 
 const DURATION = .5;
 const REPEAT_COUNT = 1;
@@ -45,26 +45,21 @@ export class Hint extends GameplayInternal {
         if (this._parallelAction) {
             this._parallelAction.stop();
 
-            let dist: number;
-            let duration: number;
-
             // vertical or horizontal
-            if (this._object1.coordinates.row == this._object2.coordinates.row)
-                dist = Math.abs(this._object1.x - this._object1Point.x);
-            else
-                dist = Math.abs(this._object1.y - this._object1Point.y);
+            const dist = (this._object1.coordinates.row == this._object2.coordinates.row)
+                ? Math.abs(this._object1.x - this._object1Point.x)
+                : Math.abs(this._object1.y - this._object1Point.y);
+            const duration = DURATION * dist / DISTANCE;
 
-            duration = DURATION * dist / DISTANCE;
-
-            addProcess(new TweenProcess(this._object1, { duration, highlightAlpha: 0 }), "animation", false);
-            addProcess(new TweenProcess(this._object2, { duration, highlightAlpha: 0 }), "animation", false);
-            addProcess(new TweenProcess(this._object1, { duration, pixi: { scaleX: 1, scaleY: 1 } }), "animation", false);
-            addProcess(new TweenProcess(this._object2, { duration, pixi: { scaleX: 1, scaleY: 1 } }), "animation", false);
-            addProcess(new TweenProcess(this._object1, { duration, pixi: {
+            addProcess(tween(this._object1, duration, { highlightAlpha: 0 }), "animation", false);
+            addProcess(tween(this._object2, duration, { highlightAlpha: 0 }), "animation", false);
+            addProcess(tween(this._object1, duration, { pixi: { scale: 1 } }), "animation", false);
+            addProcess(tween(this._object2, duration, { pixi: { scale: 1 } }), "animation", false);
+            addProcess(tween(this._object1, duration, { pixi: {
                 positionX: this._object1Point.x,
                 positionY: this._object1Point.y
             } }), "animation", false);
-            addProcess(new TweenProcess(this._object2, { duration, pixi: {
+            addProcess(tween(this._object2, duration, { pixi: {
                 positionX: this._object2Point.x,
                 positionY: this._object2Point.y
             } }), "animation", false);
@@ -77,13 +72,11 @@ export class Hint extends GameplayInternal {
 
         const { x1, x2, y1, y2 } = this.calculateOffsets(this._object1, this._object2, DISTANCE);
 
-        this._parallelAction = new ParallelProcess([
-            new TweenProcess(this._object1, {
-                duration: DURATION,
+        this._parallelAction = parallel(
+            tween(this._object1, DURATION, {
                 highlightAlpha: 1,
                 pixi: {
-                    scaleX: SCALE,
-                    scaleY: SCALE,
+                    scale: SCALE,
                     positionX: x1,
                     positionY: y1,
                 },
@@ -91,12 +84,10 @@ export class Hint extends GameplayInternal {
                 yoyo: true,
                 ease: "back.out" // adjust
             }),
-            new TweenProcess(this._object2, {
-                duration: DURATION,
+            tween(this._object2, DURATION, {
                 highlightAlpha: 1,
                 pixi: {
-                    scaleX: SCALE,
-                    scaleY: SCALE,
+                    scale: SCALE,
                     positionX: x2,
                     positionY: y2,
                 },
@@ -104,7 +95,7 @@ export class Hint extends GameplayInternal {
                 yoyo: true,
                 ease: "back.out"
             })
-        ]).start();
+        ).start();
     }
 
     private calculateOffsets(object1: BoardObject, object2: BoardObject, distance: number) {
